@@ -1,0 +1,17 @@
+.header {
+    .MuiAppBar-colorDefault-61 {
+        background-color: #000;
+    }
+    .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo {
+        margin-left: 50px;
+        height: 70px;
+        width: 70px;
+        margin: 5px 0 5px 30px;
+        border-radius: 50%;
+    }
+}
