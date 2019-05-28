@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Header from '../components/Navbar/Header';
+import { incrementCounter, decrementCounter } from '../modules/actions/countActions';
+import { Button } from '@material-ui/core';
+import Navbar from '../components/Navbar/Navbar';
+import '../styles.scss';
 
 const styles = theme => ({
   button: {
@@ -13,39 +17,30 @@ const styles = theme => ({
   },
 });
 
-
 function IndexPage(props) {
-  const { classes } = props;
+  const { counter, incrementCounter, decrementCounter } = props;
   return (
     <div>
-      <Header />
-      {/* <Button variant="contained" className={classes.button}>
-        Default
-      </Button>
-      <Button variant="contained" color="primary" className={classes.button}>
-        Primary
-      </Button>
-      <Button variant="contained" color="secondary" className={classes.button}>
-        Secondary
-      </Button>
-      <Button variant="contained" color="secondary" disabled className={classes.button}>
-        Disabled
-      </Button>
-      <Button variant="contained" href="#contained-buttons" className={classes.button}>
-        Link
-      </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="contained-button-file"
-        multiple
-        type="file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" component="span" className={classes.button}>
-          Upload
-        </Button>
-      </label> */}
+      <Navbar />
+      <section className="hero-section">
+        <div className="hero-container">
+          <div className="hero-image">
+            <img src="https://image.tmdb.org/t/p/w500/vOipe2myi26UDwP978hsYOrnUWC.jpg" alt="The Jungle Book"></img>
+          </div>
+          <div className="hero-info">
+            <h1>The Jungle Book</h1>
+            <h3>2016 | Family, Adventure, Drama, Fantasy</h3>
+            <p>After a threat from the tiger Shere Khan forces him to flee the jungle, a man-cub named Mowgli embarks on a journey of self discovery with the help of panther, Bagheera, and free spirited bear, Baloo.</p>
+            <div className="buttons-container">
+              <Button className="button1" variant="contained" color="secondary">Buy Now</Button>
+              <Button className="button2" variant="contained" color="primary">Add to Favorites</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="popular">
+        <h1>Most Popular</h1>
+      </section>
     </div>
   );
 }
@@ -54,4 +49,18 @@ IndexPage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IndexPage);
+const mapState = state => ({
+  counter: state.fakeData.data,
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    incrementCounter: () => { dispatch(incrementCounter()) },
+    decrementCounter: () => { dispatch(decrementCounter()) }
+  }
+}
+
+export default compose(
+  connect(mapState, mapDispatchToProps),
+  withStyles(styles)
+  )(IndexPage);

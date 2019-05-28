@@ -4,17 +4,18 @@ import "../../styles.scss";
 import { AppBar, Toolbar } from '@material-ui/core';
 import MenuLink from './MenuLink';
 import '../../styles.scss';
-import SignOutMenu from "./SignOutMenu";
-import SignInMenu from './SignInMenu';
+import SignedOutMenu from "./SignedOutMenu";
+import SignedInMenu from './SignedInMenu';
 
-class Header extends Component {
+class Navbar extends Component {
   state = {
-    linkNames: ['profile', 'favorites']
+    linkNames: ['profile', 'favorites'],
+    signedIn: true
   }
   render() {
-    const { linkNames } = this.state;
+    const { linkNames, signedIn } = this.state;
     return (
-      <div className="header">
+      <div className="navbar">
         <AppBar position="fixed" color="default">
           <Toolbar className="toolbar">    
             <Link href="/">
@@ -24,8 +25,9 @@ class Header extends Component {
             </Link>
             <div>
               {linkNames && linkNames.map((linkName, index) => <MenuLink key={index} linkName={linkName} /> )}
-              {/* <SignOutMenu /> */}
-              <SignInMenu />
+              {signedIn ?
+              <SignedInMenu /> :
+              <SignedOutMenu />}
             </div>
           </Toolbar>
         </AppBar>
@@ -34,6 +36,6 @@ class Header extends Component {
   }
 };
 
-export default Header;
+export default Navbar;
 
 

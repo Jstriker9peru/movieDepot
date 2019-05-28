@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Menu, MenuItem, Avatar } from '@material-ui/core';
 
-const SignInMenu = () => {
+const SignedInMenu = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
@@ -19,7 +19,7 @@ const SignInMenu = () => {
                 onClick={handleClick}
             >
                 <Avatar alt="Remy Sharp" src="/static/courage.jpg" className='avatar' />
-                <i class="material-icons">
+                <i className="material-icons">
                  arrow_drop_down
                 </i>
             </Button>
@@ -32,4 +32,4 @@ const SignInMenu = () => {
     )
 }
 
-export default SignInMenu
+export default SignedInMenu
