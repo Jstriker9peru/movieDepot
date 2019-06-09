@@ -23,7 +23,7 @@ class ImageCarousel extends Component {
             this.setState({ newMovies });   
             this.carouselRef.current.autoPlay();
         });
-}
+  }
 
   render() {
     const { newMovies } = this.state;

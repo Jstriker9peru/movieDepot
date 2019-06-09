@@ -1,11 +1,17 @@
 .hero-container {
-    margin: 50px 0;
+    // margin: 50px 0 60px;
     display: flex;
+    height: 620px;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    &:hover {
+        .hero-info {
+            opacity: 1;
+        }
+    }
     .hero-image {
         margin: 0 100px;
         height: 500px;
@@ -16,16 +22,23 @@
        }
     }
     .hero-info {
-        max-width: 500px;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        background-color: rgba(0,0,0,0.4);
+        padding: 40px;
+        height: 100%;
+        max-width: 700px;
         color: white;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         text-align: left;
         font-family: Lato;
         h1 {
             font-size: 70px;
             padding: 0;
             margin: 0;
+            color: rgb(241, 233, 188);
         }
         h3 {
             font-size: 15px;
@@ -33,6 +46,19 @@
         p {
             font-size: 20px;
             letter-spacing: 1px;
+            .readMoreBtn {
+                display: inline-flex;
+                margin: 5px 0;
+                padding: 0;
+                font-size: 16px;
+                align-items: center;
+                width: auto;
+                border-style: none;
+                outline: none;
+                color: rgb(241, 233, 188);;
+                background-color: inherit;
+                cursor: pointer;
+            }
         }
         .buttons-container {
             width: 265px;
