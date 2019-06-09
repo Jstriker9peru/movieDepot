@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Link from 'next/link';
-import "../../styles.scss";
 import { AppBar, Toolbar } from '@material-ui/core';
 import MenuLink from './MenuLink';
-import '../../styles.scss';
+import '../../scss/styles.scss';
 import SignedOutMenu from "./SignedOutMenu";
 import SignedInMenu from './SignedInMenu';
 
