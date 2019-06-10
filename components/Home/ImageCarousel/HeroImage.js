@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./HeroImage.scss";
 import { Button } from "@material-ui/core";
+import "./HeroImage.scss";
 
 const HeroImage = ({ movieInfo }) => {
   const { poster_path, original_title, overview, release_date, backdrop_path } = movieInfo;
@@ -45,7 +45,7 @@ const HeroImage = ({ movieInfo }) => {
         </p>
         <div className="buttons-container">
           <Button className="button1" variant="contained" color="secondary">
-            Buy Now
+            More Info
           </Button>
           <Button className="button2" variant="contained" color="primary">
             Add to Favorites

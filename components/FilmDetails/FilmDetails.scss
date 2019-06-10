@@ -1,0 +1,19 @@
+.film-details {
+    background: red;
+    height: auto;
+    .title {
+        background: green;
+        height: 200px;
+        width: 200px;
+    }
+    .description-box {
+        background: orange;
+        height: 200px;
+        width: 200px;
+    }
+    .cast-box {
+        background: yellow;
+        height: 200px;
+        width: 200px;
+    }
+}

@@ -10,7 +10,8 @@ class ImageCarousel extends Component {
   }
 
   state = {
-    newMovies: []
+    newMovies: [],
+    hovered: false
   };
 
   componentDidMount() {
@@ -22,6 +23,7 @@ class ImageCarousel extends Component {
             newMovies = newMovies.results;
             this.setState({ newMovies });   
             this.carouselRef.current.autoPlay();
+            console.log(this.carouselRef.current)
         });
   }
 
@@ -32,6 +34,7 @@ class ImageCarousel extends Component {
         autoPlay={true}
         infiniteLoop={true}
         useKeyboardArrows={true}
+        stopOnHover={true}
         showThumbs={false}
         showStatus={false}
         interval={5000}
