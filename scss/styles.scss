@@ -3,10 +3,9 @@
 }
 
 .navbar {
-    .MuiAppBar-colorDefault-61 {
-        background-color: #000;
-    }
     .toolbar {
+        background-color: #736962;
+        color: white;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -21,8 +20,9 @@
 }
 
 .hero-section {
-    margin: 0 auto;
+    margin: 0px auto;
     font-family: Lato;
     margin-top: 84px;
     background: black;
+    width: 75%;
 }
