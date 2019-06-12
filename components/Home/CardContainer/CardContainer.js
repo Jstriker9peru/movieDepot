@@ -12,6 +12,11 @@ class CardContainer extends Component {
     }
     render() {
         const { title, results } = this.props;
+        let linkTitle = title.toLowerCase();
+        if (linkTitle === 'top rated') {
+            linkTitle = 'toprated'
+        }
+        console.log(linkTitle);
         return (
             <section className="category-section">
                 <h1>{title} Films</h1>
@@ -23,7 +28,7 @@ class CardContainer extends Component {
                             <Link key={id} href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>    
                                 <Card className="card">
                                     <img
-                                    className="card-poster"
+                                    className="card-poster-single"
                                     src={`http://image.tmdb.org/t/p/w500${poster_path}`}
                                     alt={`${original_title} Poster`}
                                     />
@@ -32,9 +37,11 @@ class CardContainer extends Component {
                         );
                     })}
                 </div>
-                <Button variant="contained" color="secondary" >
-                    See All {title}
-                </Button>
+                <Link href={`/${linkTitle}`} as={`/${linkTitle}`}>
+                    <Button variant="contained" color="secondary" >
+                        See All {title}
+                    </Button>
+                </Link>
             </section>
         )
     }
