@@ -1,0 +1,33 @@
+.card {
+    border: 1px solid rgb(253, 255, 225);
+    display: flex;
+    width: 260px;
+    height: 118px;
+    margin: 15px;
+    background-color: black !important;
+    color: white;
+    .card-poster {
+        background: black;
+        min-width: 92px;
+        width: 92px;
+        height: 118px;
+    }
+    .actor-info {
+        height: 108px;
+        margin: 10px 15px 0 15px;
+        display: flex;
+        flex-direction: column;
+        
+        // justify-content: center;
+        // align-items: center;
+        .actor-name {
+            font-size: 20px;
+            color: rgb(243, 211, 135);
+        }
+        .character {
+            // color: rgb(252, 250, 164);
+            // color: rgb(112, 192, 245);
+            color: #F6F2D6;
+        }
+    }
+}

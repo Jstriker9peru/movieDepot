@@ -1,19 +1,194 @@
 .film-details {
-    background: red;
+    background: #4B79A1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #283E51, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     height: auto;
-    .title {
-        background: green;
-        height: 200px;
-        width: 200px;
+    overflow: hidden;
+    font-family: 'Lato';
+    margin-top: 84px;
+    padding-top: 20px;
+    position: relative;
+    display: grid;
+    grid-column-gap: 50px;
+    grid-template-columns: 800px 670px;
+    grid-template-rows: 500px 1050px;
+    grid-template-areas: 
+        "description cast"
+        "similar cast";
+    .description-container {
+        grid-area: 'description';
+        width: 800px;
+        height: 450px;
+        margin: 30px 0 0 50px;
+        .description-title {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // background: gold;
+            background: #F6F2D6;
+            // color: black;
+            color: black;
+            height: auto;
+            min-height: 50px;
+            max-height: 70px;
+            border-radius: 5px;
+            border: 1px solid black;
+            width: 260px;
+            text-align: center;
+            z-index: 3;
+            left: 580px;
+            top: 30px;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+        }
+        .description-box {
+            display: flex;
+            background: black;
+            height: auto;
+            width: 800px;
+            position: relative;
+            .poster {
+                min-height: 450px;
+                max-height: 460px;
+            }
+            .description {
+                display: flex;
+                flex-direction: column;
+                margin: 20px;
+                max-height: 420px;
+                .tag {
+                    color: rgb(112, 192, 245);
+                }
+                .release-date {
+                    font-size: 16px;
+                    color: white;
+                }
+                .overview {
+                    margin-top: 5px;
+                    font-size: 16px;
+                    letter-spacing: 1px;
+                    color: white;
+                }
+                .genres {
+                    margin-top: 5px;
+                    display: flex;
+                    width: 100%;
+                    color: rgb(112, 192, 245);
+                    font-size: 18px;
+                    cursor: pointer;
+                    .genre {
+                        margin-right: 10px;
+
+                    }
+                }
+                .runtime {
+                    width: 50px;
+                    height: 50px;
+                    font-family: 'Roboto';
+                    background: rgba(0,0,0,0.6);
+                    border: 1px solid white;
+                    color: white;
+                    border-radius: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 16px;
+                    position: absolute;
+                    left: 10px;
+                    top: 10px;
+                    .number {
+                        padding: 0;
+                        margin: 0;
+                    }
+                    .min {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
     }
-    .description-box {
-        background: orange;
-        height: 200px;
-        width: 200px;
+    .cast-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 1500px;
+        grid-area: 'cast';
+        position: relative;
+        margin-top: 5px;
+        h1 {
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            // background: gold;
+            background: #F6F2D6;
+
+            color: black;
+            width: 250px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-top: 25px;
+            z-index: 3;
+        }
+        .cast-box {
+            position: relative;
+            height: auto;
+            width: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
     }
-    .cast-box {
-        background: yellow;
-        height: 200px;
-        width: 200px;
+    .similar-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 700px;
+        grid-area: 'similar';
+        position: relative;
+        left: 70px;
+        top: 15px;
+        h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            // background: gold;
+            background: #F6F2D6;
+            color: black;
+            height: 40px;
+            width: 250px;
+            font-size: 24px;
+            border-radius: 5px;
+            border: 1px solid black;
+            z-index: 3;
+        }
+        .similar-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            // top: -1600px;
+            // left: 80px;
+            .card {
+                width: 180px;
+                height: 250px;
+                margin: 15px;
+                cursor: pointer;
+                .card-poster-single {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
     }
 }

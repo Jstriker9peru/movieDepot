@@ -4,7 +4,7 @@
 
 .navbar {
     .toolbar {
-        background-color: #736962;
+        background-color: rgb(240, 239, 239);
         color: white;
         display: flex;
         align-items: center;
@@ -20,9 +20,15 @@
 }
 
 .hero-section {
-    margin: 0px auto;
+    margin: 114px auto 0 auto;
     font-family: Lato;
-    margin-top: 84px;
     background: black;
     width: 75%;
+}
+
+.list-page-body {
+    margin: 84px 0 0;
+    font-family: Lato;
+    background-color: #465462;
+    color: white;
 }
