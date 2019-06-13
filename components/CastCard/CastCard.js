@@ -4,7 +4,7 @@ import './CastCard.scss';
 
 const CastCard = ({ name, photo, role }) => {
     return (
-        <Card className="card">
+        <Card className="cast-card">
             <img
                 className="card-poster"
                 src={

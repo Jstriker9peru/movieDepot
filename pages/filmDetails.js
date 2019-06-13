@@ -52,9 +52,10 @@ class filmDetails extends Component {
 
   componentDidUpdate(prevProps) {
     const { id } = this.props.router.query;
-    if (prevProps.router.id !== id) {
+    if (prevProps.router.query.id !== id) {
       this.fetchMovieData(id);
     }
+    console.log('Film Details has updated');
   }
 
   render() {

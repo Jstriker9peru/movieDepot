@@ -2,6 +2,7 @@ import React from "react";
 import Link from 'next/link';
 import Card from "@material-ui/core/Card";
 import CastCard from "../CastCard/CastCard";
+import SinglePosterCard from '../SinglePosterCard/SinglePosterCard';
 import "./FilmDetails.scss";
 
 const FilmDetails = ({ info, actors, similar, directors, genres }) => {
@@ -20,12 +21,14 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
       <div className="description-container">
         <h1 className="description-title">{original_title}</h1>
         <Card className="description-box">
+            {poster_path &&
             <img
             className="poster"
             height="auto"
             width="320"
             src={`http://image.tmdb.org/t/p/w500${poster_path}`}
             />
+            }
             <div className="description">
                 <div className="release-date"><span className="tag">Release Date<br></br> </span>  {release_date}</div>
                 <div className="overview"><span className="tag">Plot<br></br> </span> {overview}</div>
@@ -73,11 +76,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
             {similar.map(movie => {
                 const { poster_path: similarPoster, original_title: similarTitle, id } = movie;
                 return (
-                    <Link key={id} href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>
-                        <Card className="card">
-                            <img className="card-poster-single" src={`http://image.tmdb.org/t/p/w500${similarPoster}`} />
-                        </Card>
-                    </Link>
+                    <SinglePosterCard key={id} id={id} poster_path={similarPoster} original_title={similarTitle} />
                 )
 
             })}

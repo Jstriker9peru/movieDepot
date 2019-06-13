@@ -26,8 +26,7 @@ class MyApp extends App {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
         />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"></link>
-       <link rel="stylesheet" href="carousel.css"/>
+        rel="stylesheet"></link>
       </Head>
     );
   }

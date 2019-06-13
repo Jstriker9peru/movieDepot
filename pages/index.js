@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles";
 import {
   incrementCounter,
   decrementCounter
 } from "../modules/actions/countActions";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 import Navbar from "../components/Navbar/Navbar";
 import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper";
@@ -15,14 +15,14 @@ import CardContainer from "../components/Home/CardContainer/CardContainer";
 import "../scss/styles.scss";
 import { renderComponent } from "recompose";
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  }
-});
+// const styles = theme => ({
+//   button: {
+//     margin: theme.spacing.unit
+//   },
+//   input: {
+//     display: "none"
+//   }
+// });
 
 class IndexPage extends Component {
   state = {
@@ -94,9 +94,9 @@ class IndexPage extends Component {
   }
 }
 
-IndexPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// IndexPage.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 const mapState = state => ({
   counter: state.fakeData.data
@@ -117,6 +117,5 @@ export default compose(
   connect(
     mapState,
     mapDispatchToProps
-  ),
-  withStyles(styles)
+  )
 )(IndexPage);

@@ -1,0 +1,11 @@
+.card {
+    border: 1px solid white;
+    width: 156px;
+    height: 231px;
+    margin: 15px;
+    cursor: pointer;
+    .card-poster-single {
+        width: 100%;
+        height: 100%;
+    }
+}

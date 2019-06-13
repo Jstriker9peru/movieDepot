@@ -17,12 +17,6 @@ const HeroImage = ({ movieInfo }) => {
 
   return (
     <div className="hero-container" style={{ backgroundImage: `url(http://image.tmdb.org/t/p/original${backdrop_path})`}}>
-      {/* <div className="hero-image">
-        <img
-          src={`http://image.tmdb.org/t/p/w500${poster_path}`}
-          alt={`${original_title} Poster`}
-        />
-      </div> */}
       <div className="hero-info">
         <h1>{original_title}</h1>
         <h3>{release_date} | Family, Adventure, Drama, Fantasy</h3>

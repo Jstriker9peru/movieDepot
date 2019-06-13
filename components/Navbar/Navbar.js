@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Link from 'next/link';
 import { AppBar, Toolbar } from '@material-ui/core';
 import MenuLink from './MenuLink';
-import '../../scss/styles.scss';
+// import '../../scss/styles.scss';
 import SignedOutMenu from "./SignedOutMenu";
 import SignedInMenu from './SignedInMenu';
+import './Navbar.scss';
 
 class Navbar extends Component {
   state = {
