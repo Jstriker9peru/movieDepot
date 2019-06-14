@@ -13,13 +13,13 @@ class ListPage extends Component {
             <div className="list-page-body">
                 <div className="list-container">
                     {list && list.map((movie, index) => {
-                        const { poster_path, original_titles, id } = movie;
+                        const { poster_path, original_title, id } = movie;
                         return (
                             <SinglePosterCard key={index} id={id} poster_path={poster_path} original_title={original_title} />
                         )    
                     })}
                 </div>
-                <Button variant="contained" color="secondary" onClick={loadMore} >
+                <Button className="see-more-btn" variant="contained" color="secondary" onClick={loadMore} >
                     See More Popular
                 </Button>
             </div>

@@ -9,8 +9,8 @@ class TopRated extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('TopRatedState')) {
-            const state = JSON.parse(localStorage.getItem('TopRatedState'));
+        if (sessionStorage.getItem('TopRatedState')) {
+            const state = JSON.parse(sessionStorage.getItem('TopRatedState'));
             this.setState({ ...state });
         } else {
             const endpoint = "https://api.themoviedb.org/3/movie/top_rated?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1";
@@ -25,7 +25,7 @@ class TopRated extends Component {
             let topRated = topRatedMovies.results;
             let currentPage = topRatedMovies.page;
 
-            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage }), () => { localStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage }), () => { sessionStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
           });
     };
 

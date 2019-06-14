@@ -1,6 +1,6 @@
 .list-page-body {
-    margin: 84px 0 0;
-    padding: 70px 200px;
+    margin: 64px 0 0;
+    padding: 70px 250px;
     font-family: Lato;
     background-color: #465462;
     color: white;
@@ -14,5 +14,8 @@
         justify-content: center;
         width: 100%;
         height: auto;
+    }
+    .see-more-btn {
+        margin: 0 60px;
     }
 }

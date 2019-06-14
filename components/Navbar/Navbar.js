@@ -9,7 +9,7 @@ import './Navbar.scss';
 
 class Navbar extends Component {
   state = {
-    linkNames: ['profile', 'favorites'],
+    linkNames: ['upcoming','popular','toprated', 'favorites'],
     signedIn: true
   }
   render() {

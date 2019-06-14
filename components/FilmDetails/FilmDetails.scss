@@ -4,7 +4,7 @@
     background: linear-gradient(to right, #283E51, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     height: auto;
     font-family: 'Lato';
-    margin-top: 84px;
+    margin-top: 64px;
     padding-top: 20px;
     position: relative;
     display: grid;
@@ -40,7 +40,7 @@
             top: 30px;
             margin: 0;
             padding: 0;
-            font-size: 20px;
+            font-size: 19px;
         }
         .description-box {
             display: flex;
@@ -117,7 +117,7 @@
         height: 1500px;
         grid-area: 'cast';
         position: relative;
-        margin-top: 5px;
+        margin-top: 30px;
         h1 {
             margin: 0px;
             padding: 0px;
@@ -125,7 +125,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            font-size: 24px;
+            font-size: 20px;
             // background: gold;
             background: #F6F2D6;
 
@@ -133,7 +133,7 @@
             width: 250px;
             border: 1px solid black;
             border-radius: 5px;
-            margin-top: 25px;
+            // margin-top: 25px;
             z-index: 3;
         }
         .cast-box {
@@ -164,9 +164,9 @@
             // background: gold;
             background: #F6F2D6;
             color: black;
-            height: 40px;
+            // height: 40px;
             width: 250px;
-            font-size: 24px;
+            font-size: 20px;
             border-radius: 5px;
             border: 1px solid black;
             z-index: 3;

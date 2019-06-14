@@ -42,6 +42,9 @@ const HeroImage = ({ movieInfo }) => {
             More Info
           </Button>
           <Button className="button2" variant="contained" color="primary">
+          <i class="material-icons test-icon">
+            star
+          </i>
             Add to Favorites
           </Button>
         </div>

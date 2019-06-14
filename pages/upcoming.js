@@ -9,11 +9,11 @@ class Upcoming extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('UpcomingState')) {
-            const state = JSON.parse(localStorage.getItem('UpcomingState'));
+        if (sessionStorage.getItem('UpcomingState')) {
+            const state = JSON.parse(sessionStorage.getItem('UpcomingState'));
             this.setState({ ...state });
         } else {
-            const endpoint = "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1";
+            const endpoint = "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1&region=US";
             this.getUpcoming(endpoint);
         }
     }
@@ -24,12 +24,12 @@ class Upcoming extends Component {
           .then(upcomingMovies => {
             let upcoming = upcomingMovies.results;
             let currentPage = upcomingMovies.page;
-            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage }), () => { localStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage }), () => { sessionStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
           });
     };
 
     loadMoreUpcoming = () => {
-        let endpoint = `https://api.themoviedb.org/3/movie/top_rated?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=${this.state.currentPage + 1}`;
+        let endpoint = `https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=${this.state.currentPage + 1}&region=US`;
         this.getUpcoming(endpoint);
     }
 

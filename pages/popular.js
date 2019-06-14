@@ -9,8 +9,8 @@ class Popular extends Component {
     }
 
     componentDidMount() {
-        if (localStorage.getItem('PopularState')) {
-            const state = JSON.parse(localStorage.getItem('PopularState'));
+        if (sessionStorage.getItem('PopularState')) {
+            const state = JSON.parse(sessionStorage.getItem('PopularState'));
             this.setState({ ...state });
         } else {
             const endpoint = "https://api.themoviedb.org/3/movie/popular?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1";
@@ -29,7 +29,7 @@ class Popular extends Component {
               console.log('This is popular', popularMovies)
             let popular = popularMovies.results;
             let currentPage = popularMovies.page;
-            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage }), () => { localStorage.setItem('PopularState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage }), () => { sessionStorage.setItem('PopularState' , JSON.stringify(this.state)); });
           });
     };
     

@@ -1,7 +1,7 @@
 .hero-container {
     // margin: 50px 0 60px;
     display: flex;
-    height: 620px;
+    height: 600px;
     width: 100%;
     align-items: center;
     justify-content: flex-end;
@@ -35,7 +35,7 @@
         text-align: left;
         font-family: Lato;
         h1 {
-            font-size: 70px;
+            font-size: 50px;
             padding: 0;
             margin: 0;
             color: rgb(241, 233, 188);
@@ -66,6 +66,14 @@
             width: 275px;
             .button1 {
                 margin-right: 6px;
+            }
+            .button2 {
+                .test-icon {
+                    color: red;
+                    background-color: blue;
+                    outline-color: yellow;
+                    border: 1px solid yellow;
+                }
             }
         }   
     }

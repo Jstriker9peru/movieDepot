@@ -44,7 +44,7 @@ class IndexPage extends Component {
 
   getUpcoming = () => {
     fetch(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1&region=US"
     )
       .then(res => res.json())
       .then(upcomingMovies => {
