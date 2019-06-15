@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 import ListPage from '../components/ListPage/ListPage';
+import LoadingPage from '../components/LoadingPage/LoadingPage';
 
 class Upcoming extends Component {
     state = {
         upcoming: [],
-        currentPage: 0
+        currentPage: 0,
+        loading: true
     }
 
     componentDidMount() {
@@ -24,7 +26,7 @@ class Upcoming extends Component {
           .then(upcomingMovies => {
             let upcoming = upcomingMovies.results;
             let currentPage = upcomingMovies.page;
-            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage }), () => { sessionStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage, loading: false }), () => { sessionStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
           });
     };
 
@@ -34,10 +36,17 @@ class Upcoming extends Component {
     }
 
     render() {
+        const { loading } = this.state;
         return (
-            <div className="list-page">
-                <Navbar />
-                <ListPage list={this.state.upcoming} loadMore={this.loadMoreUpcoming} />
+            <div>
+                {loading ? ( 
+                    <LoadingPage />
+                ) : (
+                    <div className="list-page">
+                        <Navbar />
+                        <ListPage list={this.state.upcoming} loadMore={this.loadMoreUpcoming} />
+                    </div>
+                )}
             </div>
         )
     }

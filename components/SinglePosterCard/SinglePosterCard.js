@@ -15,7 +15,7 @@ const SinglePosterCard = ({ id, poster_path, original_title }) => {
                             <Card className="card">
                                 <img
                                 className="card-poster-single"
-                                src={`http://image.tmdb.org/t/p/w500${poster_path}`}
+                                src={poster_path ? `http://image.tmdb.org/t/p/w500${poster_path}` : '/static/noImageFound.jpg'}
                                 alt={`${original_title} Poster`}
                                 />
                             </Card>

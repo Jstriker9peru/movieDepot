@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import ListPage from '../components/ListPage/ListPage';
+import LoadingPage from '../components/LoadingPage/LoadingPage';
 
 class Popular extends Component {
     state = {
         popular: [],
-        currentPage: 0
+        currentPage: 0,
+        loading: true
     }
 
     componentDidMount() {
@@ -29,7 +31,7 @@ class Popular extends Component {
               console.log('This is popular', popularMovies)
             let popular = popularMovies.results;
             let currentPage = popularMovies.page;
-            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage }), () => { sessionStorage.setItem('PopularState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage, loading: false }), () => { sessionStorage.setItem('PopularState' , JSON.stringify(this.state)); });
           });
     };
     
@@ -39,10 +41,17 @@ class Popular extends Component {
     }
 
     render() {
+        const { loading } = this.state;
         return (
-            <div className="list-page">
-                <Navbar />
-                <ListPage list={this.state.popular} loadMore={this.loadMorePopular} />
+            <div>
+                {loading ? ( 
+                    <LoadingPage />
+                ) : (
+                    <div className="list-page">
+                        <Navbar />
+                        <ListPage list={this.state.popular} loadMore={this.loadMorePopular} />
+                    </div>
+                )}
             </div>
         )
     }

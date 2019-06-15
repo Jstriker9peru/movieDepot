@@ -21,14 +21,12 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
       <div className="description-container">
         <h1 className="description-title">{original_title}</h1>
         <Card className="description-box">
-            {poster_path &&
             <img
             className="poster"
             height="auto"
             width="320"
-            src={`http://image.tmdb.org/t/p/w500${poster_path}`}
+            src={poster_path ? `http://image.tmdb.org/t/p/w500${poster_path}` : '/static/noImageFound.jpg'}
             />
-            }
             <div className="description">
                 <div className="release-date"><span className="tag">Release Date<br></br> </span>  {release_date}</div>
                 <div className="overview"><span className="tag">Plot<br></br> </span> {overview}</div>
@@ -41,7 +39,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
                 </div>
                 <div className="runtime">
                     <h4 className="number">
-                        {runtime}
+                        {runtime ? runtime : '?'}
                     </h4>
                     <span className="min">Min</span>
                 </div>

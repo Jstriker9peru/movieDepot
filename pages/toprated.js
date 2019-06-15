@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 import ListPage from '../components/ListPage/ListPage';
+import LoadingPage from '../components/LoadingPage/LoadingPage';
 
 class TopRated extends Component {
     state = {
         topRated: [],
-        currentPage: 0
+        currentPage: 0,
+        loading: true
     }
 
     componentDidMount() {
@@ -25,7 +27,7 @@ class TopRated extends Component {
             let topRated = topRatedMovies.results;
             let currentPage = topRatedMovies.page;
 
-            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage }), () => { sessionStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage, loading: false }), () => { sessionStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
           });
     };
 
@@ -35,10 +37,17 @@ class TopRated extends Component {
     }
 
     render() {
+        const { loading } = this.state;
         return (
-            <div className="list-page">
-                <Navbar />
-                <ListPage list={this.state.topRated} loadMore={this.loadMoreTopRated} />
+            <div>
+                {loading ? ( 
+                    <LoadingPage />
+                 ) : (
+                    <div className="list-page">
+                        <Navbar />
+                        <ListPage list={this.state.topRated} loadMore={this.loadMoreTopRated} />
+                    </div>
+                )}
             </div>
         )
     }
