@@ -1,0 +1,26 @@
+.favorites-page {
+    margin-top: 64px;
+    font-family: Lato;
+    padding-left: 50px;
+    padding-top: 25px;
+    // background-color: #465462;
+    // color: white;
+    h1 {
+        font-size: 30px;
+        padding: 0;
+        margin: 0;
+    }
+    h3 {
+        font-size: 18px;
+        color: rgb(160, 149, 149);
+    }
+    .favorites-container {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        background: grey;
+        height: auto;
+        width: 930px;
+    }
+}

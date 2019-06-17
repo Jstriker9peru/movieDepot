@@ -7,6 +7,10 @@ import {
   incrementCounter,
   decrementCounter
 } from "../modules/actions/countActions";
+import {
+  addFavorite,
+  removeFavorite
+} from '../modules/actions/favoritesActions';
 // import { Button } from "@material-ui/core";
 import Navbar from "../components/Navbar/Navbar";
 import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
@@ -99,7 +103,8 @@ class IndexPage extends Component {
 // };
 
 const mapState = state => ({
-  counter: state.fakeData.data
+  counter: state.fakeData.data,
+  favorites: state.favoritesData.favorites
 });
 
 const mapDispatchToProps = dispatch => {
@@ -109,6 +114,12 @@ const mapDispatchToProps = dispatch => {
     },
     decrementCounter: () => {
       dispatch(decrementCounter());
+    },
+    addFavorite: (movieInfo) => {
+      dispatch(addFavorite(movieInfo));
+    },
+    removeFavorite: (movieInfo) => {
+      dispatch(removeFavorite(movieInfo));
     }
   };
 };

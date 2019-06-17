@@ -9,9 +9,6 @@ const LoadingPage = () => {
                 <div className="circle"></div>
                 <div className="circle"></div>
             </div>
-            {/* <span></span>
-            <span></span>
-            <span></span> */}
         </div>
     )
 }

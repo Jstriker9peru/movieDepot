@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
+import { compose } from "redux";
+import { connect } from "react-redux";
+import {
+    addFavorite,
+    removeFavorite
+  } from '../../modules/actions/favoritesActions';
 import Link from 'next/link';
 import Card from "@material-ui/core/Card";
 import './SinglePosterCard.scss';
 
-const SinglePosterCard = ({ id, poster_path, original_title }) => {
+const SinglePosterCard = ({ id, poster_path, original_title, addFavorite, removeFavorite, movieInfo }) => {
     const [favorited, changeFavorited] = useState(false);
-    const toggleFavorited = () => {
-        changeFavorited(!favorited);
+    const toggleFavorited = (info) => {
+        if (favorited) {
+            changeFavorited(false);
+            removeFavorite(info)
+        } else {
+            changeFavorited(true);
+            addFavorite(info)
+        }
+        
     }
     return (
         <React.Fragment>
@@ -27,9 +40,11 @@ const SinglePosterCard = ({ id, poster_path, original_title }) => {
                                 </div>
                             </div>
                         </Link>
-                        <div className="favorite-icon-container" onClick={toggleFavorited}>
+                        <div className="favorite-icon-container" onClick={() => {
+                    return toggleFavorited(movieInfo);
+                }}>
                             {favorited ? 
-                                <i class="material-icons favorite-icon-full">
+                                <i className="material-icons favorite-icon-full">
                                     star
                                 </i>
                                 : 
@@ -43,4 +58,17 @@ const SinglePosterCard = ({ id, poster_path, original_title }) => {
     )
 }
 
-export default SinglePosterCard
+const mapDispatchToProps = dispatch => {
+    return {
+      addFavorite: (movieInfo) => {      
+        dispatch(addFavorite(movieInfo));
+      },
+      removeFavorite: (movieInfo) => {
+        dispatch(removeFavorite(movieInfo));
+      }
+    };
+};
+
+export default compose(
+    connect(null, mapDispatchToProps)
+)(SinglePosterCard);
