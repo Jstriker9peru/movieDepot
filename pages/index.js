@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { loadFirebase } from '../lib/db';
+import "firebase/firestore";
 // import { withStyles } from "@material-ui/core/styles";
 import {
   incrementCounter,
@@ -34,6 +36,21 @@ class IndexPage extends Component {
     upcoming: [],
     topRated: []
   };
+
+  static getInitialProps = () => {
+    return loadFirebase().firestore().collection('users')
+      .get()
+      .then(snapshot => {
+        let data = [];
+        snapshot.forEach(doc => {
+          data.push({
+            id: doc.id,
+            ...doc.data()
+          })
+        })
+        return { userData: data };
+      })
+  }
 
   getPopular = () => {
     fetch(
