@@ -13,10 +13,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
+    "react-redux-firebase": "^2.2.6",
     "react-responsive-carousel": "^3.1.49",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-firestore": "^0.8.0",
+    "redux-form": "^8.2.4",
+    "redux-thunk": "^2.3.0",
+    "revalidate": "^1.2.0"
   },
   "scripts": {
     "dev": "next",
