@@ -1,5 +1,6 @@
 import { closeModal } from './modalActions';
 import { SubmissionError } from 'redux-form';
+import { FETCH_USER } from './authConstants';
 // import { loadFirebase } from '../../lib/db';
 
 
@@ -49,6 +50,14 @@ export const SignUp = ({ firestore, firebase }, user) =>
             })
         }
     }
+
+    export const fetchUser = (user) => {
+        return {
+            type: FETCH_USER,
+            payload: user
+        }
+    }
+      
 
 
 

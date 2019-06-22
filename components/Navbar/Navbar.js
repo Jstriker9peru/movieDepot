@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { withFirebase } from 'react-redux-firebase';
 import { openModal } from '../../modules/actions/modalActions';
+import { fetchUser } from '../../modules/actions/authActions';
 import MenuLink from './MenuLink';
 import SignInModal from '../SignIn/SignInModal';
 import SignUpModal from '../SignUp/SignUpModal';
@@ -28,6 +29,12 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
+    this.props.firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        this.props.fetchUser(user);
+      }
+    });
     console.log('This is the current user after mount', this.props.firebase.auth().currentUser);
   }
   // handleSignOut = () => {
@@ -79,8 +86,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = {
-  openModal
+const mapDispatchToProps = (dispatch) => {
+  return {
+    openModal: (type) => {
+      dispatch(openModal(type));
+    },
+    fetchUser: (user) => {
+      dispatch(fetchUser(user));
+    }
+  }
 }
 
 export default compose(

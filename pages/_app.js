@@ -14,6 +14,8 @@ import { myFirebase } from '../lib/db';
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
+  attachAuthIsReady: true,
+  firebaseStateName: 'firebase'
   // updateProfileOnLogin: false
 };
 
@@ -33,6 +35,10 @@ class MyApp extends App {
     }
 
     return { pageProps };
+  }
+
+  componentDidMount() {
+
   }
 
   renderHead() {
