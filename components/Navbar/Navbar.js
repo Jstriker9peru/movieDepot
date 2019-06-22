@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import { compose } from "redux";
+import { connect } from 'react-redux';
 import Link from 'next/link';
 import { AppBar, Toolbar } from '@material-ui/core';
+import { withFirebase } from 'react-redux-firebase';
+import { openModal } from '../../modules/actions/modalActions';
 import MenuLink from './MenuLink';
-// import '../../scss/styles.scss';
+import SignInModal from '../SignIn/SignInModal';
+import SignUpModal from '../SignUp/SignUpModal';
 import SignedOutMenu from "./SignedOutMenu";
 import SignedInMenu from './SignedInMenu';
 import './Navbar.scss';
@@ -10,12 +15,42 @@ import './Navbar.scss';
 class Navbar extends Component {
   state = {
     linkNames: ['upcoming','popular','toprated', 'favorites', 'test'],
-    signedIn: true
+    // signedIn: false
   }
+
+  handleSignIn = () => {
+    this.props.openModal('SignInModal');
+    console.log('Modal has opened');
+  };
+
+  handleSignUp = () => {
+    this.props.openModal('SignUpModal')
+  }
+
+  componentDidMount() {
+    console.log('This is the current user after mount', this.props.firebase.auth().currentUser);
+  }
+  // handleSignOut = () => {
+  //   this.props.firebase.logout();
+  //   this.props.history.push('/');
+  // };
+
   render() {
-    const { linkNames, signedIn } = this.state;
+    const { linkNames } = this.state;
+    const { currentModal, auth, firebase } = this.props;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
+    const nothing = null;
+    console.log('This is empty', auth.isEmpty);
+    console.log('This is loaded', auth.isLoaded);
+    console.log('This is current user', firebase.auth().currentUser);
     return (
       <div className="navbar">
+        {currentModal.modalType && currentModal.modalType == 'SignInModal' ? (
+          <SignInModal />
+        ) : nothing}
+        {currentModal.modalType && currentModal.modalType == 'SignUpModal' ? (
+          <SignUpModal />
+        ) : nothing}
         <AppBar position="fixed" color="default">
           <Toolbar className="toolbar">    
             <Link href="/">
@@ -25,9 +60,9 @@ class Navbar extends Component {
             </Link>
             <div>
               {linkNames && linkNames.map((linkName, index) => <MenuLink key={index} linkName={linkName} /> )}
-              {signedIn ?
+              {authenticated ?
               <SignedInMenu /> :
-              <SignedOutMenu />}
+              <SignedOutMenu handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} />}
             </div>
           </Toolbar>
         </AppBar>
@@ -36,6 +71,21 @@ class Navbar extends Component {
   }
 };
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  console.log('This is mapStateNav', state);
+  return {
+    currentModal: state.modal,
+    auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = {
+  openModal
+}
+
+export default compose(
+  withFirebase,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Navbar);
 
 

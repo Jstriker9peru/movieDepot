@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -7,7 +7,12 @@ import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import { closeModal } from '../../modules/actions/modalActions';
+import { SignUp } from '../../modules/actions/authActions';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { useFirebase, useFirestore } from "react-redux-firebase";
+import { compose } from 'redux';
 import './SignUpModal.scss';
 
 const renderTextField = (
@@ -48,8 +53,20 @@ const validate = values => {
     return errors;
  }
 
-const SignUpModal = ({ invalid, handleSubmit, submitting }) => {
+const SignUpModal = ({ invalid, handleSubmit, submitting, closeModal, signUpUser }) => {
     const [open, setOpen] = React.useState(true);
+    const firestore = useFirestore();
+    const firebase = useFirebase();
+
+    const SignUpUser = (creds) => {
+        signUpUser(creds, firestore, firebase);
+    }
+
+    // const SignUpUser = useCallback(
+    //     (creds) => {
+    //         dispatch(SignUp({ firestore, firebase }, creds))},
+    //     [dispatch, firestore, firebase]
+    // )
 
     const handleOpen = () => {
         setOpen(true);
@@ -57,6 +74,7 @@ const SignUpModal = ({ invalid, handleSubmit, submitting }) => {
     
     const handleClose = () => {
         setOpen(false);
+        closeModal()
     };
 
     return (
@@ -75,7 +93,7 @@ const SignUpModal = ({ invalid, handleSubmit, submitting }) => {
                     <Typography component="h1" variant="h5">
                         Sign Up
                     </Typography>
-                    <form className='sign-in-form'>
+                    <form className='sign-in-form' onSubmit={handleSubmit(SignUpUser)}>
                         <Grid className="grid" container spacing={0}>
                             <Grid className="grid-item" item xs={12} sm={6}>
                                 <Field name="firstName" label="First Name" component={renderTextField} type="text" />
@@ -114,7 +132,18 @@ const SignUpModal = ({ invalid, handleSubmit, submitting }) => {
     )
 }
 
-export default reduxForm({
-    form: 'SignUp',
-    validate
-})(SignUpModal);
+const mapDispatchToProps = (dispatch) => {
+    return {
+    closeModal,
+    signUpUser: (creds, firestore, firebase) => {
+        dispatch(SignUp({ firestore, firebase }, creds))
+    }}
+}
+
+export default compose(
+    connect(null, mapDispatchToProps),
+    reduxForm({
+        form: 'SignUp',
+        validate
+    })
+)(SignUpModal);

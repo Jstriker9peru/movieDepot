@@ -1,7 +1,10 @@
 import React from 'react';
+// import { compose } from "redux";
+// import { connect } from 'react-redux';
 import { Button, Menu, MenuItem, Avatar } from '@material-ui/core';
+import { withFirebase } from 'react-redux-firebase';
 
-const SignedInMenu = () => {
+const SignedInMenu = ({ handleSignOut }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
@@ -11,6 +14,14 @@ const SignedInMenu = () => {
     function handleClose() {
         setAnchorEl(null);
     }
+    // function logOut() {
+        //     // handleSignOut();
+        // }
+    const logOut = () => {
+        setAnchorEl(null);
+        this.props.firebase.logout();
+        this.props.history.push('/');
+    };
     return (
         <React.Fragment>
             <Button
@@ -26,10 +37,10 @@ const SignedInMenu = () => {
             <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logOut}>Logout</MenuItem>
             </Menu>
         </React.Fragment>
     )
 }
 
-export default SignedInMenu
+export default withFirebase(SignedInMenu);

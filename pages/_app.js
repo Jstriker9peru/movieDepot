@@ -2,9 +2,27 @@ import React from "react";
 import App, { Container } from "next/app";
 import Head from "next/head";
 import withRedux from "next-redux-wrapper";
-import { initStore } from '../modules/utils/store';
 import { Provider } from 'react-redux';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { configureStore } from "../modules/utils/configureStore";
+// import firebase from 'firebase/app';
+// import 'firebase/auth';
+import { myFirebase } from '../lib/db';
+
+const rrfConfig = {
+  userProfile: "users",
+  useFirestoreForProfile: true,
+  // updateProfileOnLogin: false
+};
+
+const rrfProps = {
+  firebase: myFirebase,
+  config: rrfConfig,
+  dispatch: configureStore().dispatch,
+  createFirestoreInstance
+}
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -36,13 +54,15 @@ class MyApp extends App {
     return (
       <Container>
         <Provider store={store}>
-          {this.renderHead()}
-          <CssBaseline />
-          <Component {...pageProps} />
+          <ReactReduxFirebaseProvider {...rrfProps}>
+            {this.renderHead()}
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ReactReduxFirebaseProvider>
         </Provider>
       </Container>
     );
   }
 }
 
-export default withRedux(initStore)(MyApp)
+export default withRedux(configureStore)(MyApp)

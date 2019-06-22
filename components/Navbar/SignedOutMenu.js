@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 
-const SignedOutMenu = () => {
+const SignedOutMenu = ({ handleSignIn, handleSignUp }) => {
     return (
         <React.Fragment>
-            <Button>Login</Button>
+            <Button onClick={handleSignIn}>Login</Button>
+            <Button onClick={handleSignUp}>Register</Button>
         </React.Fragment>
     )
 }

@@ -1,15 +1,18 @@
 import { closeModal } from './modalActions';
 import { SubmissionError } from 'redux-form';
-import { loadFirebase } from '../../lib/db';
+// import { loadFirebase } from '../../lib/db';
 
-export const SignIn = (creds) => {
-    return async (dispatch, getState, {getFirebase}) => {
-        const firebase = getFirebase();
+
+export const SignIn = ({ firebase }, creds) => {
+    return async (dispatch, getState) => {
+        console.log('These are the signin creds', creds);
+        console.log('This is firebase', firebase);
         try {
-            await firebase.auth().signInWithEmailAndPassword(creds.email, creds.password);
+            await firebase.auth().signInWithEmailAndPassword(creds.email, creds.password).then(user => console.log('This is the signed in user', user)).catch(error => console.log('This is a sign in error', error.message));
+            console.log('Signed In');
             dispatch(closeModal());
         } catch (error) {
-            // console.log(error);
+            console.log('SignIn Unsuccessful');
             throw new SubmissionError({
                 _error: error.message
             })
@@ -18,15 +21,10 @@ export const SignIn = (creds) => {
     }
 }
 
-const firebase1= loadFirebase();
 
-export const SignUp = (user) => 
-    async (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase();
-        console.log('This is firebase1', firebase1);
-        console.log('This is firebase',firebase);
-        const firestore = getFirestore();
-        console.log('This is firestore', firestore);
+export const SignUp = ({ firestore, firebase }, user) => 
+    async (dispatch, getState) => {
+        console.log('This is the user', user);
         try {
             // create the user in auth
             let createdUser = await firebase.auth().createUserWithEmailAndPassword(user.email, user.password);

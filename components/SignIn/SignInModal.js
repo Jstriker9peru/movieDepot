@@ -7,14 +7,20 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { useFirebase, useFirestore } from "react-redux-firebase";
+import { connect } from 'react-redux';
+import { closeModal } from '../../modules/actions/modalActions';
+import { SignIn } from '../../modules/actions/authActions';
+import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import './SignInModal.scss';
 
 const renderTextField = (
     { input, label, type, meta: { touched, error } }
   ) => {
+    console.log('This is the error', error);
     return (
     <TextField
       variant="outlined"
@@ -31,7 +37,7 @@ const renderTextField = (
 const renderCheckbox = ({ input, label }) => (
     <FormControlLabel
         control={<Checkbox value="remember" color="primary" 
-        onCheck={input.onChange} />}
+        onChange={input.onChange} />}
         label={label}
         onChange={input.onChange}
         checked={input.value ? true : false}
@@ -46,20 +52,27 @@ const validate = values => {
     ];
     requiredFields.forEach(field => {
      if (!values[field]) {
-       errors[field] = 'Required';
+       errors[field] = true;
      }
     });
     if (
      values.email &&
      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-     errors.email = 'Invalid email address';
+     errors.email = true;
     }
     return errors;
  }
 
-const SignInModal = ({ invalid, handleSubmit, submitting }) => {
+const SignInModal = ({ invalid, handleSubmit, submitting, closeModal, signInUser }) => {
     const [open, setOpen] = React.useState(true);
+    const firestore = useFirestore();
+    const firebase = useFirebase();
+
+    const SignInUser = (creds) => {
+        signInUser(creds, firebase)
+    }
+
 
     const handleOpen = () => {
         setOpen(true);
@@ -67,6 +80,7 @@ const SignInModal = ({ invalid, handleSubmit, submitting }) => {
     
     const handleClose = () => {
         setOpen(false);
+        closeModal();
     };
 
     return (
@@ -85,7 +99,7 @@ const SignInModal = ({ invalid, handleSubmit, submitting }) => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className='sign-in-form' onSubmit={handleSubmit}>
+                    <form className='sign-in-form' onSubmit={handleSubmit(SignInUser)}>
                         <Grid className="grid" container spacing={0}>
                             <Grid className="grid-item" item xs={12} sm={12}>
                                 <Field name="email" label="Email Address" component={renderTextField} type="email" />
@@ -125,8 +139,20 @@ const SignInModal = ({ invalid, handleSubmit, submitting }) => {
     )
 }
 
-export default reduxForm({
-    form: 'SignIn',
-    validate,
-    onSubmit: (values) => console.log(values)
-})(SignInModal);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeModal,
+        signInUser: (creds, firebase) => {
+            dispatch(SignIn({ firebase }, creds))
+        }
+    }
+}
+
+export default compose(
+    connect(null, mapDispatchToProps),
+    reduxForm({
+        form: 'SignIn',
+        validate,
+        onSubmit: (values) => console.log(values)
+    })
+)(SignInModal);
