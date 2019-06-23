@@ -1,10 +1,12 @@
 import React from 'react';
-// import { compose } from "redux";
-// import { connect } from 'react-redux';
+import { compose } from "redux";
+import { connect } from 'react-redux';
+import { logOut } from '../../modules/actions/authActions';
+import { withRouter } from 'next/router';
 import { Button, Menu, MenuItem, Avatar } from '@material-ui/core';
 import { withFirebase } from 'react-redux-firebase';
 
-const SignedInMenu = ({ handleSignOut }) => {
+const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
@@ -17,10 +19,12 @@ const SignedInMenu = ({ handleSignOut }) => {
     // function logOut() {
         //     // handleSignOut();
         // }
-    const logOut = () => {
+    const signOut = () => {
         setAnchorEl(null);
-        this.props.firebase.logout();
-        this.props.history.push('/');
+        logOut();
+        firebase.logout();
+        router.push('/');
+        console.log('User logged out');
     };
     return (
         <React.Fragment>
@@ -37,10 +41,18 @@ const SignedInMenu = ({ handleSignOut }) => {
             <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Settings</MenuItem>
-                <MenuItem onClick={logOut}>Logout</MenuItem>
+                <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
         </React.Fragment>
     )
 }
 
-export default withFirebase(SignedInMenu);
+const mapDispatchToProps = {
+    logOut
+}
+
+export default compose(
+    withFirebase,
+    withRouter,
+    connect(null, mapDispatchToProps)
+)(SignedInMenu);

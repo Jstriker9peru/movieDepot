@@ -37,18 +37,12 @@ class Navbar extends Component {
     });
     console.log('This is the current user after mount', this.props.firebase.auth().currentUser);
   }
-  // handleSignOut = () => {
-  //   this.props.firebase.logout();
-  //   this.props.history.push('/');
-  // };
 
   render() {
     const { linkNames } = this.state;
-    const { currentModal, auth, firebase } = this.props;
-    const authenticated = auth.isLoaded && !auth.isEmpty;
+    const { currentModal, auth, authUser, firebase } = this.props;
+    const authenticated = authUser.authenticated;
     const nothing = null;
-    console.log('This is empty', auth.isEmpty);
-    console.log('This is loaded', auth.isLoaded);
     console.log('This is current user', firebase.auth().currentUser);
     return (
       <div className="navbar">
@@ -79,10 +73,10 @@ class Navbar extends Component {
 };
 
 const mapStateToProps = (state) => {
-  console.log('This is mapStateNav', state);
   return {
     currentModal: state.modal,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authUser: state.auth
   }
 }
 

@@ -11,6 +11,8 @@ import { configureStore } from "../modules/utils/configureStore";
 // import 'firebase/auth';
 import { myFirebase } from '../lib/db';
 
+const myStore = configureStore();
+
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
@@ -22,7 +24,7 @@ const rrfConfig = {
 const rrfProps = {
   firebase: myFirebase,
   config: rrfConfig,
-  dispatch: configureStore().dispatch,
+  dispatch: myStore.dispatch,
   createFirestoreInstance
 }
 
@@ -35,10 +37,6 @@ class MyApp extends App {
     }
 
     return { pageProps };
-  }
-
-  componentDidMount() {
-
   }
 
   renderHead() {

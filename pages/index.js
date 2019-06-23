@@ -85,6 +85,10 @@ class IndexPage extends Component {
       });
   };
 
+  // componentDidMount() {
+  //   this.props.store.firebaseAuthIsReady().then(() => console.log('Auth has loaded'));
+  // }
+
   render() {
     const { popular, upcoming, topRated } = this.state;
     return (

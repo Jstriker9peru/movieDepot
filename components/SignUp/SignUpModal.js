@@ -8,7 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { closeModal } from '../../modules/actions/modalActions';
-import { SignUp } from '../../modules/actions/authActions';
+import { SignUp, formError } from '../../modules/actions/authActions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { useFirebase, useFirestore } from "react-redux-firebase";
@@ -18,17 +18,21 @@ import './SignUpModal.scss';
 const renderTextField = (
     { input, label, type, meta: { touched, error } }
   ) => {
+    let hasError = error ? true : false;
     return (
-    <TextField
-      variant="outlined"
-      required
-      fullWidth
-      id={input.name}   
-      label={label}
-      error={touched && error}
-      type={type}
-      {...input}
-    />
+        <div>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id={input.name}   
+              label={label}
+              error={touched && hasError}
+              type={type}
+              {...input}
+            />
+            {touched && error && <span className="error-text">{error}</span>}
+        </div>
 )};
 
 const validate = values => {
@@ -41,14 +45,18 @@ const validate = values => {
     ];
     requiredFields.forEach(field => {
      if (!values[field]) {
-       errors[field] = true;
+       errors[field] = 'Required';
      }
     });
     if (
      values.email &&
      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-     errors.email = true;
+     errors.email = "Invalid email address";
+    }
+
+    if (values.password && values.password.length < 6) {
+        errors.password = 'Password must be at least 6 characters'
     }
     return errors;
  }
@@ -75,6 +83,7 @@ const SignUpModal = ({ invalid, handleSubmit, submitting, closeModal, signUpUser
     const handleClose = () => {
         setOpen(false);
         closeModal()
+        formError(null);
     };
 
     return (
@@ -134,16 +143,23 @@ const SignUpModal = ({ invalid, handleSubmit, submitting, closeModal, signUpUser
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    closeModal,
-    signUpUser: (creds, firestore, firebase) => {
-        dispatch(SignUp({ firestore, firebase }, creds))
-    }}
+        closeModal: () => {
+            dispatch(closeModal())
+        },
+        signUpUser: (creds, firestore, firebase) => {
+            dispatch(SignUp({ firestore, firebase }, creds))
+        },
+        formError: () => {
+            dispatch(formError(null))
+        }
+    }
 }
 
 export default compose(
     connect(null, mapDispatchToProps),
     reduxForm({
         form: 'SignUp',
-        validate
+        validate,
+        enableReinitialize: true
     })
 )(SignUpModal);
