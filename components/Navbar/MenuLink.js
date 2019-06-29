@@ -1,12 +1,16 @@
 import React from 'react';
-import { Button, Link } from '@material-ui/core';
+import { Button, Link, MenuItem } from '@material-ui/core';
 
-const MenuLink = ({ linkName }) => {
+const MenuLink = ({ linkName, handleClose, isButton }) => {
     return (
         <Link href={`/${linkName}`}>
-            <Button>
-                {linkName}
-            </Button>
+            {isButton ? (
+                <Button>
+                    {linkName}
+                </Button>
+            ) : (
+                <MenuItem onClick={handleClose}>{linkName}</MenuItem>
+            )}
         </Link>
     )
 }

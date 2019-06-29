@@ -44,7 +44,7 @@ class Upcoming extends Component {
                 ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.upcoming} loadMore={this.loadMoreUpcoming} />
+                        <ListPage list={this.state.upcoming} loadMore={this.loadMoreUpcoming} name="Upcoming" />
                     </div>
                 )}
             </div>

@@ -49,7 +49,7 @@ class Popular extends Component {
                 ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.popular} loadMore={this.loadMorePopular} />
+                        <ListPage list={this.state.popular} loadMore={this.loadMorePopular} name="Popular" />
                     </div>
                 )}
             </div>

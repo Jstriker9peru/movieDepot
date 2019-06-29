@@ -22,9 +22,12 @@ class ImageCarousel extends Component {
         .then(newMovies => {
             newMovies = newMovies.results;
             this.setState({ newMovies });   
-            this.carouselRef.current.autoPlay();
+            // this.carouselRef.current.autoPlay();
             console.log(this.carouselRef.current)
-        });
+        })
+        .then(() => {
+          this.carouselRef.current.autoPlay();
+        })
   }
 
   render() {

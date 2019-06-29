@@ -7,8 +7,6 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { configureStore } from "../modules/utils/configureStore";
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
 import { myFirebase } from '../lib/db';
 
 const myStore = configureStore();
@@ -38,6 +36,19 @@ class MyApp extends App {
 
     return { pageProps };
   }
+
+  componentDidMount() {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      console.log('hello ssr');
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('_app unmounting');
+  }
+
 
   renderHead() {
     return (

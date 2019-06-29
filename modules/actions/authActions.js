@@ -6,8 +6,10 @@ import { FETCH_USER, LOGOUT, FORM_ERROR } from './authConstants';
 
 export const SignIn = ({ firebase }, creds) => {
     return async (dispatch, getState) => {
+        let state = getState();
         console.log('These are the signin creds', creds);
         console.log('This is firebase', firebase);
+        console.log('This is getState', state);
         try {
             await firebase.auth().signInWithEmailAndPassword(creds.email, creds.password)
             .then(user => {
@@ -61,6 +63,7 @@ export const SignUp = ({ firestore, firebase }, user) =>
     }
 
     export const fetchUser = (user) => {
+        console.log('starting...');
         return {
             type: FETCH_USER,
             payload: user

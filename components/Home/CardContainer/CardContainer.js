@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Card from "@material-ui/core/Card";
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import SinglePosterCard from '../../SinglePosterCard/SinglePosterCard';
 import './CardContainer.scss';
@@ -12,7 +13,7 @@ class CardContainer extends Component {
     }
 
     render() {
-        const { title, results } = this.props;
+        const { title, results, favorites } = this.props;
         let linkTitle = title.toLowerCase();
         if (linkTitle === 'top rated') {
             linkTitle = 'toprated'
@@ -38,5 +39,9 @@ class CardContainer extends Component {
         )
     }
 }
+
+// const mapState = state => ({
+//     favorites: state.favoritesData.favorites
+// });
 
 export default CardContainer;

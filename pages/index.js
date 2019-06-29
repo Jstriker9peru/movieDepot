@@ -9,9 +9,10 @@ import {
   incrementCounter,
   decrementCounter
 } from "../modules/actions/countActions";
+import { withFirebase, withFirestore } from 'react-redux-firebase';
+import { getFavorites } from '../modules/actions/favoritesActions';
 import {
-  addFavorite,
-  removeFavorite
+  addFavorite
 } from '../modules/actions/favoritesActions';
 // import { Button } from "@material-ui/core";
 import Navbar from "../components/Navbar/Navbar";
@@ -19,7 +20,6 @@ import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper";
 import CardContainer from "../components/Home/CardContainer/CardContainer";
 import "../scss/styles.scss";
-import { renderComponent } from "recompose";
 
 // const styles = theme => ({
 //   button: {
@@ -86,8 +86,14 @@ class IndexPage extends Component {
   };
 
   // componentDidMount() {
-  //   this.props.store.firebaseAuthIsReady().then(() => console.log('Auth has loaded'));
+  //   console.log('index firebase',this.props.firebase);
+  //   console.log('index firestore',this.props.firestore);
+  //   this.props.getFavorites(this.props.firestore, this.props.firebase);
   // }
+
+  componentWillUnmount() {
+    console.log('index unmounting');
+  }
 
   render() {
     const { popular, upcoming, topRated } = this.state;
@@ -136,16 +142,21 @@ const mapDispatchToProps = dispatch => {
     decrementCounter: () => {
       dispatch(decrementCounter());
     },
-    addFavorite: (movieInfo) => {
-      dispatch(addFavorite(movieInfo));
-    },
-    removeFavorite: (movieInfo) => {
-      dispatch(removeFavorite(movieInfo));
+    getFavorites: (firestore, firebase) => {
+      dispatch(getFavorites({ firestore, firebase }))
     }
+    // addFavorite: (movieInfo) => {
+    //   dispatch(addFavorite(movieInfo));
+    // },
+    // removeFavorite: (movieInfo) => {
+    //   dispatch(removeFavorite(movieInfo));
+    // }
   };
 };
 
 export default compose(
+  withFirebase,
+  withFirestore,
   connect(
     mapState,
     mapDispatchToProps

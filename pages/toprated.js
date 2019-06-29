@@ -45,7 +45,7 @@ class TopRated extends Component {
                  ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.topRated} loadMore={this.loadMoreTopRated} />
+                        <ListPage list={this.state.topRated} loadMore={this.loadMoreTopRated} name="Top Rated" />
                     </div>
                 )}
             </div>

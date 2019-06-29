@@ -7,14 +7,25 @@ import { ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITES } from './favoritesConstan
 //     }
 // }
 
-// export const removeFavorite = (movieInfo) => {
-//     return {
-//         type: REMOVE_FAVORITE,
-//         payload: movieInfo
-//     }
-// }
+export const removeFavorite = (movieInfo, { firestore, firebase }) =>
+    async (dispatch, getState) => {
+        const state = getState();
+        const user = state.auth.currentUser;
 
-export const addFavorite = (movieInfo, { firestore }) =>
+        try {
+            await firestore.delete({
+                collection: 'users',
+                doc: user.uid,
+                subcollections: [{ collection: 'favorites', doc: `${movieInfo.id}`}]
+            }).then(() => {
+                dispatch(getFavorites({ firestore, firebase }))
+            }).catch(error => console.log('remove Error', error))
+        } catch (error) {
+            console.log('This is the removeFavorite error', error);
+        }
+    }
+
+export const addFavorite = (movieInfo, { firestore, firebase }) =>
     async (dispatch, getState) => {
         const state = getState();
         const user = state.auth.currentUser;
@@ -29,9 +40,12 @@ export const addFavorite = (movieInfo, { firestore }) =>
                     collection: 'favorites', doc: `${movieInfo.id}`
                 }]
             }, {
+                id: movieInfo.id,
                 title: movieInfo.title,
                 poster: movieInfo.poster_path
-            })
+            }).then(() => {
+                dispatch(getFavorites({ firestore, firebase }))
+            }).catch(error => console.log('add Error', error));
         } catch (error) {
             console.log(error);
         }
@@ -39,6 +53,8 @@ export const addFavorite = (movieInfo, { firestore }) =>
 
 export const getFavorites = ({ firestore, firebase }) =>
     async (dispatch, getState) => {
+        console.log('This firestore', firestore);
+        console.log('This firebase', firebase);
         let currentUser = firebase.auth().currentUser;
         let favorites;
         console.log('This is the getFavorites current user', currentUser);

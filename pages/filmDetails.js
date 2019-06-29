@@ -52,6 +52,8 @@ class filmDetails extends Component {
 
   componentDidUpdate(prevProps) {
     const { id } = this.props.router.query;
+    console.log('prop id', id);
+    console.log('prevProps id', prevProps.router.query.id);
     if (prevProps.router.query.id !== id) {
       this.fetchMovieData(id);
     }
@@ -76,14 +78,5 @@ class filmDetails extends Component {
   }
 }
 
-// const mapState = state => ({
-//     title: state.filmDetails._source.original_title
-// })
-
 export default withRouter(filmDetails);
-//     connect(null)()
-//     // async (req, { dispatch }) => {
-//     //  const filmDetails = dispatch(fetchfilmDetails(get(req, 'query.id')));
-//     //  await Promise.all([product]);
-//     // },
-// );
+

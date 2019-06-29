@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
+import Link from "next/link";
 import "./HeroImage.scss";
 
 const HeroImage = ({ movieInfo }) => {
-  const { poster_path, original_title, overview, release_date, backdrop_path } = movieInfo;
+  const {
+    original_title,
+    overview,
+    release_date,
+    backdrop_path,
+    id
+  } = movieInfo;
   const overviewMaxLength = 300;
   const overviewLength = overview.length;
   const exceededLength = overviewLength > overviewMaxLength;
+  const [shouldReadMore, changeReadMore] = useState(exceededLength);
   const reducedOverview =
     overview.substring(0, overviewMaxLength).replace(/\w+[.!?]?$/, "") + " ...";
-  const [shouldReadMore, changeReadMore] = useState(exceededLength);
 
   const changeOverview = () => {
-      changeReadMore(!shouldReadMore);
-  }
+    changeReadMore(!shouldReadMore);
+  };
 
   return (
-    <div className="hero-container" style={{ backgroundImage: `url(http://image.tmdb.org/t/p/original${backdrop_path})`}}>
+    <div
+      className="hero-container"
+      style={{
+        backgroundImage: `url(http://image.tmdb.org/t/p/original${backdrop_path})`
+      }}
+    >
       <div className="hero-info">
         <h1>{original_title}</h1>
         <h3>{release_date} | Family, Adventure, Drama, Fantasy</h3>
@@ -38,15 +50,11 @@ const HeroImage = ({ movieInfo }) => {
           ) : null}
         </p>
         <div className="buttons-container">
-          <Button className="button1" variant="contained" color="secondary">
-            More Info
-          </Button>
-          <Button className="button2" variant="contained" color="primary">
-          <i className="material-icons test-icon">
-            star
-          </i>
-            Add to Favorites
-          </Button>
+          <Link href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>
+            <Button className="button1" variant="contained" color="secondary">
+              More Info
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

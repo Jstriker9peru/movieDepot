@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import './FavoritesPage.scss';
 
-const FavoritesPage = ({ currentUser }) => {
+const FavoritesPage = ({ currentUser, favorites }) => {
     const firestore = useFirestore();
     console.log('This is favorites page firestore', firestore)
     return (
@@ -13,17 +13,12 @@ const FavoritesPage = ({ currentUser }) => {
             <h1>My Favorites</h1>
             <h3>Take a look at your full list of favorites</h3>
             <div className="favorites-container">
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
-                <SinglePosterCard original_title={'Toy Story'} />
+                {favorites && favorites.map(favorite => {
+                    const { id, title, poster} = favorite;
+                    return (
+                        <SinglePosterCard key={id} movieInfo={favorite} original_title={title} poster_path={poster} id={id} />
+                    )
+                })}
             </div>
         </div>
     )
@@ -31,9 +26,16 @@ const FavoritesPage = ({ currentUser }) => {
 
 const mapStateToProps = (state) => ({
     currentUser: state.auth.currentUser,
+    favorites: state.favoritesData.favorites
 
 });
-const mapDispatchToProps = null;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getFavorites: (firestore, firebase) => {
+            dispatch(getFavorites({ firestore, firebase }))
+        }
+    }
+}
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)

@@ -1,0 +1,36 @@
+.favorite-icon-container {
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    width: auto;
+    left: 58px;
+    bottom: 70px;
+    text-align: center;
+    cursor: pointer;
+    .favorite-icon {
+        color: white;
+        font-size: 40px;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+            color: rgb(245, 232, 158);
+            font-size: 42px;
+        }
+    }
+    .favorite-icon-full {
+        color: rgb(245, 232, 158);
+        font-size: 40px;
+        &:hover {
+            font-size: 42px;
+        }
+    }
+}
+
+.button2 {
+    width: 15em;
+    .test-icon {
+        color: red;
+        background-color: blue;
+        outline-color: yellow;
+        border: 1px solid yellow;
+    }
+}
