@@ -29,7 +29,7 @@ const CategoriesMenu = ({ linkNames }) => {
             <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 {linkNames && linkNames.map((linkName, index) => {
                     return (
-                        <MenuLink key={index} linkName={linkName} handleClose={handleClose} isButton={false} /> 
+                        <MenuLink key={index} title={linkName} linkName={linkName} handleClose={handleClose} isButton={false} /> 
                     )
                 })}
             </Menu> 

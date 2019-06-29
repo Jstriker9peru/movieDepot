@@ -17,7 +17,7 @@ import './Navbar.scss';
 
 class Navbar extends Component {
   state = {
-    linkNames: ['upcoming','popular','toprated', 'favorites', 'test'],
+    linkNames: ['upcoming','popular','toprated', 'test'],
     searchTerm: ''
   }
 

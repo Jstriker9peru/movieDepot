@@ -5,6 +5,7 @@ import { logOut } from '../../modules/actions/authActions';
 import { withRouter } from 'next/router';
 import { Button, Menu, MenuItem, Avatar } from '@material-ui/core';
 import { withFirebase } from 'react-redux-firebase';
+import MenuLink from './MenuLink';
 
 const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,8 +40,10 @@ const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
                 </i>
             </Button>
             <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Settings</MenuItem>
+                {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose} linkName="favorites">My Favorites</MenuItem> */}
+                <MenuLink linkName="profile" title="Profile" handleClose={handleClose} isButton={false} />
+                <MenuLink linkName={"favorites"} title="My Favorites" handleClose={handleClose} isButton={false} />
                 <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
         </React.Fragment>

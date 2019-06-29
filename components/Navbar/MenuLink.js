@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Link, MenuItem } from '@material-ui/core';
 
-const MenuLink = ({ linkName, handleClose, isButton }) => {
+const MenuLink = ({ linkName, handleClose, isButton, title }) => {
     return (
         <Link href={`/${linkName}`}>
             {isButton ? (
@@ -9,7 +9,7 @@ const MenuLink = ({ linkName, handleClose, isButton }) => {
                     {linkName}
                 </Button>
             ) : (
-                <MenuItem onClick={handleClose}>{linkName}</MenuItem>
+                <MenuItem onClick={handleClose}>{title}</MenuItem>
             )}
         </Link>
     )
