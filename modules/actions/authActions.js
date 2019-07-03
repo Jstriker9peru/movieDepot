@@ -50,6 +50,8 @@ export const SignUp = ({ firestore, firebase }, user) =>
             let newUser = {
                 displayName: user.firstName,
                 lastName: user.lastName,
+                dateOfBirth: '',
+                country: '',
                 createdAt: firestore.FieldValue.serverTimestamp()
             }
             await firestore.set(`users/${createdUser.user.uid}`, {...newUser});

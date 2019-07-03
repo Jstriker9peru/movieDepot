@@ -85,11 +85,11 @@ class IndexPage extends Component {
       });
   };
 
-  // componentDidMount() {
-  //   console.log('index firebase',this.props.firebase);
-  //   console.log('index firestore',this.props.firestore);
-  //   this.props.getFavorites(this.props.firestore, this.props.firebase);
-  // }
+  componentDidMount() {
+    console.log('index firebase',this.props.firebase.auth().currentUser);
+    // console.log('index firestore',this.props.firestore);
+    // this.props.getFavorites(this.props.firestore, this.props.firebase);
+  }
 
   componentWillUnmount() {
     console.log('index unmounting');

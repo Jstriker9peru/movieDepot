@@ -31,13 +31,18 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch({type: 'AUTHENTICATION_INIT_STARTED'});
     console.log('Nav firebase', this.props.firebase);
     console.log('Nav firestore', this.props.firestore);
     this.props.firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
-        this.props.fetchUser(user)
-        console.log('Hello chicken');
+        let userInfo = this.props.firestore.collection('users').doc(`${user.uid}`).get().then((doc) => {
+          console.log('this is the firestore user info', doc.data());
+          return doc.data();
+        }).catch(error => console.log('firestore userInfo error', error));
+        this.props.fetchUser(userInfo)
+        // console.log('Hello chicken');
         this.props.getFavorites(this.props.firestore, this.props.firebase);
       }
     });

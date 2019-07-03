@@ -1,0 +1,27 @@
+.profile-page-container {
+    background-color: #465462;
+    margin-top: 64px;
+    padding: 2em 16em;
+    height: 100vh; 
+    .profile-page {
+        background: white;
+        height: auto;
+        padding: 2em;
+        .title {
+            display: flex;
+            align-items: center;
+            color: black;
+            .profile-avatar {
+                margin-right: 0.5em;
+                border: 1px solid black;
+                width: 3em;
+                height: 3em; 
+            }
+        }
+        .info-form {
+            .textField {
+                margin: 0.5em 0;
+            }
+        }
+    }
+}

@@ -34,7 +34,7 @@ const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-                <Avatar alt="Remy Sharp" src="/static/courage.jpg" className='avatar' />
+                <Avatar alt="Remy Sharp" src="/static/courage.jpg" className='avatar nav-avatar' />
                 <i className="material-icons">
                  arrow_drop_down
                 </i>

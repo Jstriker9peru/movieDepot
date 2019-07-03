@@ -7,7 +7,8 @@ class Upcoming extends Component {
     state = {
         upcoming: [],
         currentPage: 0,
-        loading: true
+        loading: true,
+        disabled: false
     }
 
     componentDidMount() {
@@ -25,8 +26,12 @@ class Upcoming extends Component {
           .then(res => res.json())
           .then(upcomingMovies => {
             let upcoming = upcomingMovies.results;
+            let disabled = false;
+            if (upcoming.length === 0) {
+                disabled = true
+            }
             let currentPage = upcomingMovies.page;
-            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage, loading: false }), () => { sessionStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ upcoming: [...prevState.upcoming, ...upcoming], currentPage, loading: false, disabled }), () => { sessionStorage.setItem('UpcomingState' , JSON.stringify(this.state)); });
           });
     };
 
@@ -44,7 +49,7 @@ class Upcoming extends Component {
                 ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.upcoming} loadMore={this.loadMoreUpcoming} name="Upcoming" />
+                        <ListPage isDisabled={this.state.disabled} list={this.state.upcoming} loadMore={this.loadMoreUpcoming} name="Upcoming" />
                     </div>
                 )}
             </div>

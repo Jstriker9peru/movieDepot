@@ -7,7 +7,8 @@ class TopRated extends Component {
     state = {
         topRated: [],
         currentPage: 0,
-        loading: true
+        loading: true,
+        disabled: false
     }
 
     componentDidMount() {
@@ -25,9 +26,13 @@ class TopRated extends Component {
           .then(res => res.json())
           .then(topRatedMovies => {
             let topRated = topRatedMovies.results;
+            let disabled = false;
+            if (topRated.length === 0) {
+                disabled = true
+            }
             let currentPage = topRatedMovies.page;
 
-            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage, loading: false }), () => { sessionStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ topRated: [...prevState.topRated, ...topRated], currentPage, loading: false, disabled }), () => { sessionStorage.setItem('TopRatedState' , JSON.stringify(this.state)); });
           });
     };
 
@@ -45,7 +50,7 @@ class TopRated extends Component {
                  ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.topRated} loadMore={this.loadMoreTopRated} name="Top Rated" />
+                        <ListPage isDisabled={this.state.disabled} list={this.state.topRated} loadMore={this.loadMoreTopRated} name="Top Rated" />
                     </div>
                 )}
             </div>

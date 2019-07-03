@@ -7,7 +7,8 @@ class Popular extends Component {
     state = {
         popular: [],
         currentPage: 0,
-        loading: true
+        loading: true,
+        disabled: false
     }
 
     componentDidMount() {
@@ -30,8 +31,12 @@ class Popular extends Component {
           .then(popularMovies => {
               console.log('This is popular', popularMovies)
             let popular = popularMovies.results;
+            let disabled = false;
+            if (popular.length === 0) {
+                disabled = true
+            }
             let currentPage = popularMovies.page;
-            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage, loading: false }), () => { sessionStorage.setItem('PopularState' , JSON.stringify(this.state)); });
+            this.setState(prevState => ({ popular: [...prevState.popular, ...popular], currentPage, loading: false, disabled }), () => { sessionStorage.setItem('PopularState' , JSON.stringify(this.state)); });
           });
     };
     
@@ -49,7 +54,7 @@ class Popular extends Component {
                 ) : (
                     <div className="list-page">
                         <Navbar />
-                        <ListPage list={this.state.popular} loadMore={this.loadMorePopular} name="Popular" />
+                        <ListPage isDisabled={this.state.disabled} list={this.state.popular} loadMore={this.loadMorePopular} name="Popular" />
                     </div>
                 )}
             </div>

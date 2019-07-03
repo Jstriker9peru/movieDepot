@@ -8,7 +8,7 @@ const SinglePosterCard = ({ id, poster_path, original_title, movieInfo }) => {
   return (
     <React.Fragment>
       <div className="single-poster-container">
-        <Link href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>
+        <Link as={`/details/${id}`} href={`/filmDetails?id=${id}`}>
           <Card className="card">
             <img
               className="card-poster-single"
@@ -21,7 +21,7 @@ const SinglePosterCard = ({ id, poster_path, original_title, movieInfo }) => {
             />
           </Card>
         </Link>
-        <Link href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>
+        <Link href={`/filmDetails?id=${id}`} as={`/details/${id}`}>
           <div className="single-card-overlay">
             <div className="overlay-title">
               <h4>{original_title}</h4>
