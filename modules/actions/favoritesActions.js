@@ -28,7 +28,7 @@ export const removeFavorite = (movieInfo, { firestore, firebase }) =>
 export const addFavorite = (movieInfo, { firestore, firebase }) =>
     async (dispatch, getState) => {
         const state = getState();
-        const user = state.auth.currentUser;
+        const user = firebase.auth().currentUser;
         console.log('This is firestore add', firestore);
         console.log('user.uid', typeof(user.uid));
         console.log('This is the movieinfo', movieInfo);

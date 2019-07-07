@@ -64,11 +64,31 @@ export const SignUp = ({ firestore, firebase }, user) =>
         }
     }
 
-    export const fetchUser = (user) => {
-        console.log('starting...');
-        return {
-            type: FETCH_USER,
-            payload: user
+    export const fetchUser = ({ firestore }, user) => {
+        return async (dispatch, getState) => {
+            let userInfo = await firestore.collection('users').doc(`${user.uid}`).get().then((doc) => {
+                return doc.data();
+            }).catch(error => console.log('firestore userInfo error', error));
+            console.log('this is the firestore user info', userInfo);
+            dispatch({ type: FETCH_USER, payload: userInfo });
+        }
+    }
+
+    export const updateProfile = ({ firestore, firebase }, values) => {
+        return async (dispatch, getState) => {
+            console.log('These are the profile page values', values);
+            try {
+                const user = firebase.auth().currentUser;
+                await user.updateProfile({
+                    displayName: values.displayName,
+                    lastName: values.lastName
+                })
+                await firestore.collection('users').doc(`${user.uid}`).set(values, { merge: true }).then(() => {
+                    window.location.reload();
+                }).catch(error => console.log(error));
+            } catch (error) {
+                console.log('This is an update profile error', error);
+            }
         }
     }
 
