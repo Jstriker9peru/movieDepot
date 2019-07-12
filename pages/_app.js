@@ -1,9 +1,10 @@
 import React from "react";
 import App, { Container } from "next/app";
 import Head from "next/head";
+import { compose } from 'redux';
 import withRedux from "next-redux-wrapper";
 import { Provider } from 'react-redux';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { ReactReduxFirebaseProvider, firebaseConnect } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { configureStore } from "../modules/utils/configureStore";
@@ -65,10 +66,10 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps } = this.props;
     return (
       <Container>
-        <Provider store={store}>
+        <Provider store={myStore}>
           <ReactReduxFirebaseProvider {...rrfProps}>
             {this.renderHead()}
             <CssBaseline />
@@ -80,4 +81,4 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(configureStore)(MyApp)
+export default MyApp

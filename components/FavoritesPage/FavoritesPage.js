@@ -8,7 +8,7 @@ import './FavoritesPage.scss';
 
 const FavoritesPage = ({ currentUser, favorites }) => {
     const firestore = useFirestore();
-    console.log('This is favorites page firestore', firestore)
+    console.log('This is favorites page favorites', favorites)
     const [currentPage, setCurrentPage] = useState(1);
     const [favoritesPerPage, setFavoritesPerPage] = useState(10);
 
@@ -25,12 +25,14 @@ const FavoritesPage = ({ currentUser, favorites }) => {
                 <h3>Take a look at your full list of favorites</h3>
                 <div className="favorites-container">
                     <div className="favorites">
-                        {favorites && currentFavorites.map(favorite => {
+                        {favorites.length > 0 ? currentFavorites.map(favorite => {
                             const { id, title, poster} = favorite;
                             return (
                                 <SinglePosterCard key={id} movieInfo={favorite} original_title={title} poster_path={poster} id={id} />
                             )
-                        })}
+                        }) : (
+                            <p style={{ color: 'white', paddingLeft: '1em' }}>You have not added any favorites yet!</p>
+                        )}
                     </div>
                     <Pagination postsPerPage={favoritesPerPage} currentPage={currentPage} paginate={paginate} totalPosts={favorites.length} />
                 </div>

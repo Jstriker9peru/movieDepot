@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Dropzone from 'react-dropzone';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import PhotoCard from '../PhotoCard/PhotoCard';
 import TextField from '@material-ui/core/TextField';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'next/router';
 import { reduxForm, Field } from 'redux-form';
+import { useFirebase, useFirestore, firestoreConnect } from "react-redux-firebase";
 import { updateProfile } from '../../modules/actions/authActions';
-import { useFirebase, useFirestore } from "react-redux-firebase";
+import { uploadProfileImage } from '../../modules/actions/imageActions';
 import './ProfilePage.scss';
-
 
 const validate = values => {
     const errors = {};
@@ -25,7 +27,7 @@ const validate = values => {
     });
     console.log('Errors inside Profile Page validate', errors);
     return errors;
- }
+}
 
  const renderTextField = (
     { input, label, type, defaultValue, meta: { touched, error } }
@@ -52,21 +54,36 @@ const validate = values => {
         </div>
 )};
 
-const ProfilePage = ({ authUser, handleSubmit, update, pristine, submitting, invalid, router }) => {
-    // const router = useRouter();
-    console.log('This is the router in the profile page', router);
+const ProfilePage = ({ authUser, auth, profile, photos, handleSubmit, update, uploadImage, pristine, submitting, invalid, router }) => {
+
     const firebase = useFirebase();
     const firestore = useFirestore();
+    const [fileInfo, setFileInfo] = useState(null); 
     const { displayName } = authUser.currentUser;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
+    const mainPhoto = photos ? photos.filter(photo => photo.url === profile.photoURL) : null;
+    console.log('this is the main photo', mainPhoto);
+    const otherPhotos = photos ? photos.filter(photo => photo.url !== profile.photoURL) : null; 
+    console.log('These are the other photos', otherPhotos);
+    const photoList = (mainPhoto && otherPhotos) ? [...mainPhoto, ...otherPhotos] : null;
+    console.log('These is the photoList', photoList);
 
     const updateProfile = (info) => {
         update(firestore, firebase, info);
     }
+
+    const onDrop = (file) => {
+        console.log('Something has been dropped', file);
+        setFileInfo(file);
+        uploadImage(firestore, firebase, file);
+    
+    }
+
     return (
         <div className="profile-page-container">
             <div className="profile-page">
                 <div className="title">
-                    <Avatar className="profile-avatar" src="/static/courage.jpg" />
+                    <Avatar className="profile-avatar" src={profile.photoURL ? profile.photoURL : '/static/noImageFound.jpg'} />
                     {displayName && (
                         <h1 className="name">
                             <span style={{ textTransform: 'capitalize'}}>{displayName}</span>'s Profile
@@ -135,8 +152,33 @@ const ProfilePage = ({ authUser, handleSubmit, update, pristine, submitting, inv
                     <div>
                         <div>Choose a photo</div>
 
+                        <div className="photos-container">
+                            {photoList && photoList.map(photo => {
+                                return (
+                                    <PhotoCard key={photo.id} photoInfo={photo} />
+                                )
+                            })}
+                        </div>
+
+                        <Dropzone onDrop={onDrop} multiple={false}>
+                            {({ getRootProps, getInputProps }) => (
+                            <div 
+                            {...getRootProps()}
+                            className="drop-container"
+                            style={{ 
+                                height: "10em",
+                                width: "10em",
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                                <input {...getInputProps()} />
+                                <p>Drop an image</p>
+                                <p>or</p>
+                                <p>Click here</p>
+                            </div>
+                            )}
+                        </Dropzone>
                     </div>
-                    <div></div>
                 </div>
             </div>
         </div>
@@ -146,7 +188,10 @@ const ProfilePage = ({ authUser, handleSubmit, update, pristine, submitting, inv
 const mapStateToProps = state => {
     return {
         authUser: state.auth,
-        initialValues: state.auth.currentUser
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+        initialValues: state.auth.currentUser,
+        photos: state.firestore.ordered.photos
     }
 }
 
@@ -154,9 +199,24 @@ const mapDispatchToProps = (dispatch) => {
     return {
         update: (firestore, firebase, info) => {
             dispatch(updateProfile({ firestore, firebase }, info))
+        },
+        uploadImage: (firestore, firebase, file) => {
+            dispatch(uploadProfileImage({ firestore, firebase }, file))
         }
     }
 }
+
+const query = (props) => {
+    console.log('this is the auth', props);
+    return [
+      {
+        collection: "users",
+        doc: `${props.auth.uid}`,
+        subcollections: [{ collection: "photos" }],
+        storeAs: "photos"
+      }
+    ];
+};
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
@@ -166,5 +226,6 @@ export default compose(
         validate,
         enableReinitialize: true,
         destroyOnUnmount: false
-    })
+    }),
+    firestoreConnect(props => query(props)),
 )(ProfilePage);

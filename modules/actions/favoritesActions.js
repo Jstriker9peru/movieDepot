@@ -1,17 +1,8 @@
 import { ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITES } from './favoritesConstants';
 
-// export const addFavorite = (movieInfo) => {
-//     return {
-//         type: ADD_FAVORITE,
-//         payload: movieInfo
-//     }
-// }
-
 export const removeFavorite = (movieInfo, { firestore, firebase }) =>
     async (dispatch, getState) => {
-        const state = getState();
-        const user = state.auth.currentUser;
-
+        const user = firebase.auth().currentUser;
         try {
             await firestore.delete({
                 collection: 'users',

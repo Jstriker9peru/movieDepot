@@ -2,7 +2,7 @@
     background-color: #465462;
     margin-top: 64px;
     padding: 2em 16em;
-    height: 100vh; 
+    height: auto; 
     .profile-page {
         background: white;
         height: auto;
@@ -28,5 +28,18 @@
                 }
             }
         }
+        .drop-container {
+            margin-top: 1em;
+            background: rgb(240, 238, 238);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            border: 5px dashed rgb(168, 161, 161);
+        }
+        .photos-container {
+            display: flex;
+            flex-wrap: wrap;
+       }
     }
 }

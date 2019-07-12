@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import { AppBar, Toolbar, Input, TextField, InputAdornment } from '@material-ui/core';
-import { withFirebase, withFirestore } from 'react-redux-firebase';
+import { firebaseConnect, firestoreConnect, withFirebase, withFirestore } from 'react-redux-firebase';
 import { openModal } from '../../modules/actions/modalActions';
 import { fetchUser } from '../../modules/actions/authActions';
 import { getFavorites } from "../../modules/actions/favoritesActions";
@@ -31,16 +31,11 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({type: 'AUTHENTICATION_INIT_STARTED'});
     console.log('Nav firebase', this.props.firebase);
     console.log('Nav firestore', this.props.firestore);
     this.props.firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
-        // let userInfo = this.props.firestore.collection('users').doc(`${user.uid}`).get().then((doc) => {
-        //   console.log('this is the firestore user info', doc.data());
-        //   return doc.data();
-        // }).catch(error => console.log('firestore userInfo error', error));
         this.props.fetchUser(this.props.firestore, user);
         // console.log('Hello chicken');
         this.props.getFavorites(this.props.firestore, this.props.firebase);
@@ -54,8 +49,9 @@ class Navbar extends Component {
 
   render() {
     const { linkNames } = this.state;
-    const { currentModal, auth, authUser, firebase } = this.props;
-    const authenticated = authUser.authenticated;
+    const { currentModal, auth, firebase } = this.props;
+    // const authenticated = authUser.authenticated;
+    const authenticated = auth.isLoaded && !auth.isEmpty;
     const nothing = null;
     console.log('This is current user 1234', firebase.auth().currentUser);
     return (
@@ -126,9 +122,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
+  firebaseConnect(),
   withFirebase,
   withFirestore,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Navbar);
 
 

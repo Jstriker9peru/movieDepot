@@ -15,8 +15,6 @@ export const configureStore = preloadedState => {
     );
   
     const store = createStore(rootReducer, preloadedState, composedEnhancer);
-
-    // store.firebaseAuthIsReady.then(() => console.log('Auth has loaded'));
   
     return store;
 };

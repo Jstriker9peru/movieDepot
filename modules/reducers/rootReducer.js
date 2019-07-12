@@ -8,11 +8,10 @@ import modalReducer from './modalReducer';
 import authReducer from './authReducer';
 
 const rootReducer = combineReducers({
-    fakeData: countReducer,
-    favoritesData: favoritesReducer,
-    form: formReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer,
+    favoritesData: favoritesReducer,
+    form: formReducer,
     modal: modalReducer,
     auth: authReducer
 })

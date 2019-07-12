@@ -48,8 +48,6 @@ const formError = (state, payload) => {
 
 
 export default createReducer(initialState, {
-    // [SIGN_IN_USER]: signInUser,
-    // [SIGN_OUT_USER]: signOutUser,
     [FETCH_USER]: fetchUser,
     [LOGOUT]: logOut,
     [FORM_ERROR]: formError

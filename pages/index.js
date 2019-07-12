@@ -130,27 +130,14 @@ class IndexPage extends Component {
 // };
 
 const mapState = state => ({
-  counter: state.fakeData.data,
   favorites: state.favoritesData.favorites
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementCounter: () => {
-      dispatch(incrementCounter());
-    },
-    decrementCounter: () => {
-      dispatch(decrementCounter());
-    },
     getFavorites: (firestore, firebase) => {
       dispatch(getFavorites({ firestore, firebase }))
     }
-    // addFavorite: (movieInfo) => {
-    //   dispatch(addFavorite(movieInfo));
-    // },
-    // removeFavorite: (movieInfo) => {
-    //   dispatch(removeFavorite(movieInfo));
-    // }
   };
 };
 

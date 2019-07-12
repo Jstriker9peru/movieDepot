@@ -1,0 +1,19 @@
+.card-style {
+    width: 160px;
+    padding: .4rem;
+    margin: .4rem;
+    .main-btn {
+        background: rgb(161, 161, 235);
+        color: white;
+        &:hover {
+            background: rgb(161, 161, 235);
+        }
+    }
+    .delete-btn {
+        background: rgb(250, 78, 78);
+        color: white;
+        &:hover {
+            background: rgb(250, 78, 78);
+        }
+    }
+}

@@ -7,7 +7,7 @@ import { Button, Menu, MenuItem, Avatar } from '@material-ui/core';
 import { withFirebase } from 'react-redux-firebase';
 import MenuLink from './MenuLink';
 
-const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
+const SignedInMenu = ({ firebase, logOut, router, profile }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
@@ -17,9 +17,7 @@ const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
     function handleClose() {
         setAnchorEl(null);
     }
-    // function logOut() {
-        //     // handleSignOut();
-        // }
+    
     const signOut = () => {
         setAnchorEl(null);
         logOut();
@@ -34,20 +32,24 @@ const SignedInMenu = ({ handleSignOut, firebase, history, logOut, router }) => {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-                <Avatar alt="Remy Sharp" src="/static/courage.jpg" className='avatar nav-avatar' />
+                <Avatar alt="Remy Sharp" src={profile.photoURL ? profile.photoURL : '/static/noImageFound.jpg'} className='avatar nav-avatar' />
                 <i className="material-icons">
                  arrow_drop_down
                 </i>
             </Button>
             <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose} linkName="favorites">My Favorites</MenuItem> */}
                 <MenuLink linkName="profile" title="Profile" handleClose={handleClose} isButton={false} />
                 <MenuLink linkName={"favorites"} title="My Favorites" handleClose={handleClose} isButton={false} />
                 <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
         </React.Fragment>
     )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.firebase.profile
+    }
 }
 
 const mapDispatchToProps = {
@@ -57,5 +59,5 @@ const mapDispatchToProps = {
 export default compose(
     withFirebase,
     withRouter,
-    connect(null, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(SignedInMenu);
