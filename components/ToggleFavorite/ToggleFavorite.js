@@ -27,8 +27,6 @@ const ToggleFavorite = ({
       } else {
         addFavorite(info, firestore, firebase);
       }
-    } else {
-      console.log("You cannot favorite without logging in");
     }
   };
 

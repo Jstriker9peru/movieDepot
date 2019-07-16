@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Navbar from "../components/Navbar/Navbar";
-import FilmDetails from "../components/FilmDetails/FilmDetails";
 import { withRouter } from "next/router";
 import { TMDB_API_KEY } from "../config.js";
+import Navbar from "../components/Navbar/Navbar";
+import FilmDetails from "../components/FilmDetails/FilmDetails";
 
 class filmDetails extends Component {
   state = {

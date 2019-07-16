@@ -4,13 +4,7 @@ import Link from "next/link";
 import "./HeroImage.scss";
 
 const HeroImage = ({ movieInfo }) => {
-  const {
-    title,
-    overview,
-    release_date,
-    backdrop_path,
-    id
-  } = movieInfo;
+  const { title, overview, release_date, backdrop_path, id } = movieInfo;
   const overviewMaxLength = 300;
   const overviewLength = overview.length;
   const exceededLength = overviewLength > overviewMaxLength;

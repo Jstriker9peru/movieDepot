@@ -1,36 +1,16 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { myFirebase } from '../lib/db';
-import "firebase/firestore";
-// import { withStyles } from "@material-ui/core/styles";
-import {
-  incrementCounter,
-  decrementCounter
-} from "../modules/actions/countActions";
-import { withFirebase, withFirestore } from 'react-redux-firebase';
-import { getFavorites } from '../modules/actions/favoritesActions';
-import {
-  addFavorite
-} from '../modules/actions/favoritesActions';
-// import { Button } from "@material-ui/core";
+import { TMDB_API_KEY } from "../config";
+import { getFavorites } from "../modules/actions/favoritesActions";
+import { withFirebase, withFirestore } from "react-redux-firebase";
 import Navbar from "../components/Navbar/Navbar";
-import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper";
 import CardContainer from "../components/Home/CardContainer/CardContainer";
-import { TMDB_API_KEY } from '../config';
+import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
+import "firebase/firestore";
 import "../scss/styles.scss";
-
-// const styles = theme => ({
-//   button: {
-//     margin: theme.spacing.unit
-//   },
-//   input: {
-//     display: "none"
-//   }
-// });
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class IndexPage extends Component {
   state = {
@@ -38,21 +18,6 @@ class IndexPage extends Component {
     upcoming: [],
     topRated: []
   };
-
-  // static getInitialProps = () => {
-  //   return myFirebase.firestore().collection('users')
-  //     .get()
-  //     .then(snapshot => {
-  //       let data = [];
-  //       snapshot.forEach(doc => {
-  //         data.push({
-  //           id: doc.id,
-  //           ...doc.data()
-  //         })
-  //       })
-  //       return { userData: data };
-  //     })
-  // }
 
   getPopular = () => {
     fetch(
@@ -87,16 +52,6 @@ class IndexPage extends Component {
       });
   };
 
-  componentDidMount() {
-    console.log('index firebase',this.props.firebase.auth().currentUser);
-    // console.log('index firestore',this.props.firestore);
-    // this.props.getFavorites(this.props.firestore, this.props.firebase);
-  }
-
-  componentWillUnmount() {
-    console.log('index unmounting');
-  }
-
   render() {
     const { popular, upcoming, topRated } = this.state;
     return (
@@ -127,10 +82,6 @@ class IndexPage extends Component {
   }
 }
 
-// IndexPage.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
-
 const mapState = state => ({
   favorites: state.favoritesData.favorites
 });
@@ -138,7 +89,7 @@ const mapState = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     getFavorites: (firestore, firebase) => {
-      dispatch(getFavorites({ firestore, firebase }))
+      dispatch(getFavorites({ firestore, firebase }));
     }
   };
 };

@@ -1,14 +1,13 @@
 .list-page-body {
-    margin: 64px 0 0;
-    padding: 70px 250px;
-    font-family: Lato;
-    background-color: #465462;
-    min-height: 100vh;
-    color: white;
     width: 100%;
+    color: white;
+    margin: 64px 0 0;
+    min-height: 100vh;
+    font-family: Lato;
+    padding: 70px 250px;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
+    background-color: #465462;
     .page-title {
         display: flex;
         align-items: center;

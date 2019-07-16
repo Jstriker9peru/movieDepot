@@ -1,33 +1,28 @@
 .cast-card {
-    border: 1px solid rgb(253, 255, 225);
-    display: flex;
+    margin: 15px;
     width: 260px;
     height: 118px;
-    margin: 15px;
-    background-color: black !important;
+    display: flex;
     color: white;
+    background-color: black !important;
+    border: 1px solid rgb(253, 255, 225);
     .card-poster {
-        background: black;
-        min-width: 92px;
         width: 92px;
         height: 118px;
+        min-width: 92px;
+        background: black;
     }
     .actor-info {
-        height: 108px;
-        margin: 10px 15px 0 15px;
         display: flex;
+        height: 108px;
         flex-direction: column;
-        
-        // justify-content: center;
-        // align-items: center;
+        margin: 10px 15px 0 15px;
         .actor-name {
             font-size: 16px;
             color: rgb(243, 211, 135);
         }
         .character {
             font-size: 14px;
-            // color: rgb(252, 250, 164);
-            // color: rgb(112, 192, 245);
             color: #F6F2D6;
         }
     }

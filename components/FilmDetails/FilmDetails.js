@@ -6,14 +6,7 @@ import SinglePosterCard from "../SinglePosterCard/SinglePosterCard";
 import "./FilmDetails.scss";
 
 const FilmDetails = ({ info, actors, similar, directors, genres }) => {
-  const {
-    title,
-    overview,
-    poster_path,
-    release_date,
-    runtime,
-    id
-  } = info;
+  const { title, overview, poster_path, release_date, runtime, id } = info;
   actors = actors.slice(0, 17);
   similar = similar.length ? similar.slice(0, 9) : null;
   genres = genres.slice(0, 3);
@@ -36,13 +29,15 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
           <div className="description">
             <div className="release-date">
               <span className="tag">
-                Release Date<br />{" "}
+                Release Date
+                <br />{" "}
               </span>{" "}
               {release_date}
             </div>
             <div className="overview">
               <span className="tag">
-                Plot<br />{" "}
+                Plot
+                <br />{" "}
               </span>{" "}
               {overview}
             </div>

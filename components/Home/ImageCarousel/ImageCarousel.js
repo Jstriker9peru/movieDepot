@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import { TMDB_API_KEY } from "../../../config";
 import { Carousel } from "react-responsive-carousel";
-import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
-import { TMDB_API_KEY } from '../../../config';
 import HeroImage from "./HeroImage";
 
-class ImageCarousel extends Component {    
+class ImageCarousel extends Component {
   constructor(props) {
-      super(props);
-      this.carouselRef = React.createRef();
+    super(props);
+    this.carouselRef = React.createRef();
   }
 
   state = {
@@ -17,18 +16,16 @@ class ImageCarousel extends Component {
 
   componentDidMount() {
     fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`
-        )
-        .then(res => res.json())
-        .then(newMovies => {
-            newMovies = newMovies.results;
-            this.setState({ newMovies });   
-            // this.carouselRef.current.autoPlay();
-            console.log(this.carouselRef.current)
-        })
-        .then(() => {
-          this.carouselRef.current.autoPlay();
-        })
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`
+    )
+      .then(res => res.json())
+      .then(newMovies => {
+        newMovies = newMovies.results;
+        this.setState({ newMovies });
+      })
+      .then(() => {
+        this.carouselRef.current.autoPlay();
+      });
   }
 
   render() {
@@ -43,7 +40,7 @@ class ImageCarousel extends Component {
         showStatus={false}
         interval={5000}
         width="100%"
-        ref={this.carouselRef} 
+        ref={this.carouselRef}
       >
         {newMovies &&
           newMovies.map(movie => {

@@ -1,55 +1,37 @@
-import { SIGN_IN_USER, SIGN_OUT_USER, FETCH_USER, LOGOUT, FORM_ERROR } from '../actions/authConstants';
-import { createReducer } from '../utils/reducerUtil';
+import { createReducer } from "../utils/reducerUtil";
+import { FETCH_USER, LOGOUT, FORM_ERROR } from "../actions/authConstants";
 
 const initialState = {
-    authenticated: false,
-    currentUser: {},
-    formError: null
+  authenticated: false,
+  currentUser: {},
+  formError: null
 };
 
-// const signInUser = (state, payload) => {
-//     return {
-//         ...state,
-//         authenticated: true,
-//         currentUser: payload.creds.email
-//     }
-// }
-
-//  const signOutUser = (state, payload) => {
-//     return {
-//         ...state,
-//         authenticated: false,
-//         currentUser: {}
-//     }
-// }
-
 const fetchUser = (state, payload) => {
-    return {
-        ...state,
-        authenticated: true,
-        currentUser: payload
-    }
-}
+  return {
+    ...state,
+    authenticated: true,
+    currentUser: payload
+  };
+};
 
-const logOut = (state) => {
-    return {
-        ...state,
-        authenticated: false,
-        currentUser: null
-    }
-}
+const logOut = state => {
+  return {
+    ...state,
+    authenticated: false,
+    currentUser: null
+  };
+};
 
 const formError = (state, payload) => {
-    return {
-        ...state,
-        formError: payload
-    }
-}
-
+  return {
+    ...state,
+    formError: payload
+  };
+};
 
 export default createReducer(initialState, {
-    [FETCH_USER]: fetchUser,
-    [LOGOUT]: logOut,
-    [FORM_ERROR]: formError
-
-})
+  [FETCH_USER]: fetchUser,
+  [LOGOUT]: logOut,
+  [FORM_ERROR]: formError
+});

@@ -1,5 +1,4 @@
 .hero-container {
-    // margin: 50px 0 60px;
     display: flex;
     height: 600px;
     width: 100%;
@@ -66,14 +65,6 @@
             width: auto;
             .button1 {
                 margin-right: 6px;
-            }
-            .button2 {
-                .test-icon {
-                    color: red;
-                    background-color: blue;
-                    outline-color: yellow;
-                    border: 1px solid yellow;
-                }
             }
         }   
     }

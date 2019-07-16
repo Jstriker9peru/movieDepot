@@ -1,7 +1,7 @@
 import React from "react";
-import ToggleFavorite from "../ToggleFavorite/ToggleFavorite";
 import Link from "next/link";
 import Card from "@material-ui/core/Card";
+import ToggleFavorite from "../ToggleFavorite/ToggleFavorite";
 import "./SinglePosterCard.scss";
 
 const SinglePosterCard = ({ id, poster_path, title, movieInfo }) => {

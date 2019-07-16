@@ -1,29 +1,17 @@
-import { createReducer } from '../utils/reducerUtil';
-import { ADD_FAVORITE, REMOVE_FAVORITE, GET_FAVORITES } from '../actions/favoritesConstants';
+import { createReducer } from "../utils/reducerUtil";
+import { GET_FAVORITES } from "../actions/favoritesConstants";
 
 const initialState = {
-    favorites: []
-}
-
-// const addFavorite = (state, payload) => {
-//     let newArray = [...state.favorites, payload];
-//     return {...state, favorites: newArray};
-// }
-
-// const removeFavorite = (state, payload) => {
-//     let newFavorites = state.favorites.filter(movie => movie.id !== payload.id);
-//     return {...state, favorites: newFavorites};
-// }
+  favorites: []
+};
 
 const getFavorites = (state, payload) => {
-    return {
-        ...state,
-        favorites: payload
-    }
-}
+  return {
+    ...state,
+    favorites: payload
+  };
+};
 
 export default createReducer(initialState, {
-    // [ADD_FAVORITE]: addFavorite,
-    // [REMOVE_FAVORITE]: removeFavorite,
-    [GET_FAVORITES]: getFavorites
-})
+  [GET_FAVORITES]: getFavorites
+});
