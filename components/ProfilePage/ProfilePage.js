@@ -150,7 +150,7 @@ const ProfilePage = ({ authUser, auth, profile, photos, handleSubmit, update, up
                 <div>
                     <h3>My Images</h3>
                     <div>
-                        <div>Choose a photo</div>
+                        <div>Choose a main photo</div>
 
                         <div className="photos-container">
                             {photoList && photoList.map(photo => {

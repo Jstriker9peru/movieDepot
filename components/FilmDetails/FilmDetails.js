@@ -7,7 +7,7 @@ import "./FilmDetails.scss";
 
 const FilmDetails = ({ info, actors, similar, directors, genres }) => {
   const {
-    original_title,
+    title,
     overview,
     poster_path,
     release_date,
@@ -21,7 +21,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
   return (
     <div className="film-details">
       <div className="description-container">
-        <h1 className="description-title">{original_title}</h1>
+        <h1 className="description-title">{title}</h1>
         <Card className="description-box">
           <img
             className="poster"
@@ -104,7 +104,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
             {similar.map(movie => {
               const {
                 poster_path: similarPoster,
-                original_title: similarTitle,
+                title: similarTitle,
                 id
               } = movie;
               return (
@@ -112,7 +112,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
                   key={id}
                   id={id}
                   poster_path={similarPoster}
-                  original_title={similarTitle}
+                  title={similarTitle}
                   movieInfo={movie}
                 />
               );

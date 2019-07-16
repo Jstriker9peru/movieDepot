@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Carousel } from "react-responsive-carousel";
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
+import { TMDB_API_KEY } from '../../../config';
 import HeroImage from "./HeroImage";
 
 class ImageCarousel extends Component {    
@@ -16,7 +17,7 @@ class ImageCarousel extends Component {
 
   componentDidMount() {
     fetch(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1"
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=en-US&page=1`
         )
         .then(res => res.json())
         .then(newMovies => {

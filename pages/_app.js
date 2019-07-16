@@ -1,14 +1,12 @@
 import React from "react";
-import App, { Container } from "next/app";
 import Head from "next/head";
-import { compose } from 'redux';
-import withRedux from "next-redux-wrapper";
-import { Provider } from 'react-redux';
-import { ReactReduxFirebaseProvider, firebaseConnect } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { Provider } from "react-redux";
+import { myFirebase } from "../lib/db";
+import App, { Container } from "next/app";
+import { createFirestoreInstance } from "redux-firestore";
 import { configureStore } from "../modules/utils/configureStore";
-import { myFirebase } from '../lib/db';
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 const myStore = configureStore();
 
@@ -16,8 +14,7 @@ const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true,
   attachAuthIsReady: true,
-  firebaseStateName: 'firebase'
-  // updateProfileOnLogin: false
+  firebaseStateName: "firebase"
 };
 
 const rrfProps = {
@@ -25,7 +22,7 @@ const rrfProps = {
   config: rrfConfig,
   dispatch: myStore.dispatch,
   createFirestoreInstance
-}
+};
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -39,28 +36,24 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
-      console.log('hello ssr');
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
 
-  componentWillUnmount() {
-    console.log('_app unmounting');
-  }
-
-
   renderHead() {
     return (
-      <Head>n
+      <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
         />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"></link>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
       </Head>
     );
   }
@@ -81,4 +74,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp
+export default MyApp;

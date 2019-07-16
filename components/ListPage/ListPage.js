@@ -6,20 +6,20 @@ import './ListPage.scss';
 
 class ListPage extends Component {  
     render() {
-        const { list, loadMore, name, isDisabled } = this.props;
+        const { list, loadMore, name, isDisabled, resultNumber } = this.props;
         return (
             <div className="list-page-body">
                 <div className="page-title">
                     <div className="ball"></div>
-                    <h1>{name} Films</h1>
+                    <h1>{name === 'Results' ? `${resultNumber} ${name} for "${this.props.router.query.query}"` : `${name} Films`} </h1>
                     <div className="ball"></div>
                 </div>
                     
                 <div className="list-container">
                     {list && list.map((movie, index) => {
-                        const { poster_path, original_title, id } = movie;
+                        const { poster_path, title, id } = movie;
                         return (
-                            <SinglePosterCard key={index} movieInfo={movie} id={id} poster_path={poster_path} original_title={original_title} />
+                            <SinglePosterCard key={index} movieInfo={movie} id={id} poster_path={poster_path} title={title} />
                         )
                     })}
                 </div>

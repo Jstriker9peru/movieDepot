@@ -20,6 +20,12 @@ app
       app.render(req, res, actualPage, queryParams);
     });
 
+    server.get('/results/:query', (req, res) => {
+      const actualPage = '/results';
+      const queryParams = { query: req.params.query };
+      app.render(req, res, actualPage, queryParams);
+    })
+
     server.get('*', (req, res) => {
       return handle(req, res);
     });

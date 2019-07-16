@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 import ListPage from '../components/ListPage/ListPage';
 import LoadingPage from '../components/LoadingPage/LoadingPage';
+import { TMDB_API_KEY } from '../config';
 
 class Upcoming extends Component {
     state = {
@@ -16,7 +17,7 @@ class Upcoming extends Component {
             const state = JSON.parse(sessionStorage.getItem('UpcomingState'));
             this.setState({ ...state });
         } else {
-            const endpoint = "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1&region=US";
+            const endpoint = `https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1&region=US`;
             this.getUpcoming(endpoint);
         }
     }
@@ -36,7 +37,7 @@ class Upcoming extends Component {
     };
 
     loadMoreUpcoming = () => {
-        let endpoint = `https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=${this.state.currentPage + 1}&region=US`;
+        let endpoint = `https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=${this.state.currentPage + 1}&region=US`;
         this.getUpcoming(endpoint);
     }
 

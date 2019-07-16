@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import ListPage from '../components/ListPage/ListPage';
 import LoadingPage from '../components/LoadingPage/LoadingPage';
+import { TMDB_API_KEY } from '../config';
 
 class Popular extends Component {
     state = {
@@ -16,7 +17,7 @@ class Popular extends Component {
             const state = JSON.parse(sessionStorage.getItem('PopularState'));
             this.setState({ ...state });
         } else {
-            const endpoint = "https://api.themoviedb.org/3/movie/popular?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1";
+            const endpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
             this.getPopular(endpoint);
         }
     }
@@ -41,7 +42,7 @@ class Popular extends Component {
     };
     
     loadMorePopular = () => {
-        let endpoint = `https://api.themoviedb.org/3/movie/popular?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=${this.state.currentPage + 1}`;
+        let endpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=${this.state.currentPage + 1}`;
         this.getPopular(endpoint);
     }
 

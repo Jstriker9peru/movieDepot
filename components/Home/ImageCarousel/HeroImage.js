@@ -5,7 +5,7 @@ import "./HeroImage.scss";
 
 const HeroImage = ({ movieInfo }) => {
   const {
-    original_title,
+    title,
     overview,
     release_date,
     backdrop_path,
@@ -30,7 +30,7 @@ const HeroImage = ({ movieInfo }) => {
       }}
     >
       <div className="hero-info">
-        <h1>{original_title}</h1>
+        <h1>{title}</h1>
         <h3>{release_date} | Family, Adventure, Drama, Fantasy</h3>
         <p>
           {shouldReadMore ? reducedOverview : overview}

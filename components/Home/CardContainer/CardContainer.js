@@ -24,9 +24,9 @@ class CardContainer extends Component {
                 <div className="card-container">
                     {results &&
                     results.map(movie => {
-                        const { poster_path, original_title, id } = movie;
+                        const { poster_path, title, id } = movie;
                         return (
-                            <SinglePosterCard movieInfo={movie} key={id} id={id} poster_path={poster_path} original_title={original_title} />
+                            <SinglePosterCard movieInfo={movie} key={id} id={id} poster_path={poster_path} title={title} />
                         );
                     })}
                 </div>

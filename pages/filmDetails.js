@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { withRouter } from "next/router";
-import { connect } from "react-redux";
 import Navbar from "../components/Navbar/Navbar";
 import FilmDetails from "../components/FilmDetails/FilmDetails";
+import { withRouter } from "next/router";
+import { TMDB_API_KEY } from "../config.js";
 
 class filmDetails extends Component {
   state = {
@@ -17,13 +17,13 @@ class filmDetails extends Component {
     try {
       Promise.all([
         fetch(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US`
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US`
         ),
         fetch(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=6db3cd67e35336927891a72c05c595cc`
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_API_KEY}`
         ),
         fetch(
-          `https://api.themoviedb.org/3/movie/${id}/similar?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1`
+          `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${TMDB_API_KEY}&language=en-US&page=1`
         )
       ])
         .then(results => Promise.all(results.map(result => result.json())))
@@ -52,12 +52,9 @@ class filmDetails extends Component {
 
   componentDidUpdate(prevProps) {
     const { id } = this.props.router.query;
-    console.log('prop id', id);
-    console.log('prevProps id', prevProps.router.query.id);
     if (prevProps.router.query.id !== id) {
       this.fetchMovieData(id);
     }
-    console.log('Film Details has updated');
   }
 
   render() {
@@ -79,4 +76,3 @@ class filmDetails extends Component {
 }
 
 export default withRouter(filmDetails);
-

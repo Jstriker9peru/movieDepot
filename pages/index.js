@@ -17,8 +17,10 @@ import {
 // import { Button } from "@material-ui/core";
 import Navbar from "../components/Navbar/Navbar";
 import ImageCarousel from "../components/Home/ImageCarousel/ImageCarousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper";
 import CardContainer from "../components/Home/CardContainer/CardContainer";
+import { TMDB_API_KEY } from '../config';
 import "../scss/styles.scss";
 
 // const styles = theme => ({
@@ -54,7 +56,7 @@ class IndexPage extends Component {
 
   getPopular = () => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`
     )
       .then(res => res.json())
       .then(popularMovies => {
@@ -65,7 +67,7 @@ class IndexPage extends Component {
 
   getUpcoming = () => {
     fetch(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1&region=US"
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1&region=US`
     )
       .then(res => res.json())
       .then(upcomingMovies => {
@@ -76,7 +78,7 @@ class IndexPage extends Component {
 
   getTopRated = () => {
     fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=6db3cd67e35336927891a72c05c595cc&language=en-US&page=1"
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_KEY}&language=en-US&page=1`
     )
       .then(res => res.json())
       .then(topRatedMovies => {

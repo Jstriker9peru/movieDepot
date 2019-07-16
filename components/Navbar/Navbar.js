@@ -8,17 +8,21 @@ import { openModal } from '../../modules/actions/modalActions';
 import { fetchUser } from '../../modules/actions/authActions';
 import { getFavorites } from "../../modules/actions/favoritesActions";
 import MenuLink from './MenuLink';
+import SearchBar from "./SearchBar";
 import SignInModal from '../SignIn/SignInModal';
 import SignUpModal from '../SignUp/SignUpModal';
 import SignedOutMenu from "./SignedOutMenu";
 import SignedInMenu from './SignedInMenu';
 import CategoriesMenu from "./CategoriesMenu";
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 import './Navbar.scss';
 
 class Navbar extends Component {
   state = {
     linkNames: ['upcoming','popular','toprated', 'test'],
-    searchTerm: ''
+    // searchTerm: '',
+    // searchResults: []
   }
 
   handleSignIn = () => {
@@ -48,7 +52,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { linkNames } = this.state;
+    const { linkNames, searchTerm, searchResults } = this.state;
     const { currentModal, auth, firebase } = this.props;
     // const authenticated = authUser.authenticated;
     const authenticated = auth.isLoaded && !auth.isEmpty;
@@ -69,23 +73,7 @@ class Navbar extends Component {
                 <img className="logo" src="/static/logo.jpg" alt="MovieDepot logo" />
               </a>
             </Link>
-            <TextField
-              id="outlined-search"
-              label="Search a movie"
-              type="search"
-              margin="dense"
-              variant="outlined"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment>
-                    <i className="search-icon material-icons">
-                      search
-                    </i>
-                  </InputAdornment>
-                )
-              }}
-            />
-            {/* <input placeholder="search" /> */}
+            <SearchBar />
             <div>
               <CategoriesMenu linkNames={linkNames} />
               {authenticated ?
