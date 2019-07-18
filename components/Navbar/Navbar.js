@@ -22,7 +22,7 @@ import "./Navbar.scss";
 
 class Navbar extends Component {
   state = {
-    linkNames: ["upcoming", "popular", "toprated", "test"]
+    linkNames: ["Upcoming", "Popular", "TopRated", "test"]
   };
 
   handleSignIn = () => {
@@ -82,7 +82,7 @@ class Navbar extends Component {
                   handleSignIn={this.handleSignIn}
                 />
               )}
-              <NavDrawer handleSignIn={this.handleSignIn} handleSignUp={this.handleSignUp} authenticated={authenticated} />
+              <NavDrawer handleSignIn={this.handleSignIn} handleSignUp={this.handleSignUp} authenticated={authenticated} profile={profile} />
             </div>
           </Toolbar>
         </AppBar>

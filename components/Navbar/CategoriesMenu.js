@@ -36,7 +36,7 @@ const CategoriesMenu = ({ linkNames }) => {
               <MenuLink
                 key={index}
                 title={linkName}
-                linkName={linkName}
+                linkName={linkName.toLowerCase()}
                 handleClose={handleClose}
                 isButton={false}
               />

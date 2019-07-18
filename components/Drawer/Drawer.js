@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { Avatar, Button, Drawer, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import './Drawer.scss';
 
-const NavDrawer = ({ handleSignIn, handleSignUp, authenticated }) => {
+const NavDrawer = ({ handleSignIn, handleSignUp, authenticated, profile }) => {
     const [state, setState] = React.useState({ left: false });
     const router = useRouter();
     const menuNames = authenticated ? ['Profile', 'Favorites'] : ['Login', 'Register'];
