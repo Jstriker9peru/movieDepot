@@ -16,16 +16,22 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
       <div className="description-container">
         <h1 className="description-title">{title}</h1>
         <Card className="description-box">
-          <img
-            className="poster"
-            height="auto"
-            width="320"
-            src={
-              poster_path
-                ? `http://image.tmdb.org/t/p/w500${poster_path}`
-                : "/static/noImageFound.jpg"
-            }
-          />
+          <div className="poster-container">
+            <img
+              className="poster"
+              height="auto"
+              width="320"
+              src={
+                poster_path
+                  ? `http://image.tmdb.org/t/p/w500${poster_path}`
+                  : "/static/noImageFound.jpg"
+              }
+            />
+            <div className="runtime">
+              <h4 className="number">{runtime ? runtime : "?"}</h4>
+              <span className="min">Min</span>
+            </div>
+          </div>
           <div className="description">
             <div className="release-date">
               <span className="tag">
@@ -51,13 +57,8 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
                   );
                 })}
             </div>
-            <ToggleFavorite isButton={true} id={id} info={info} />
-            <div className="runtime">
-              <h4 className="number">{runtime ? runtime : "?"}</h4>
-              <span className="min">Min</span>
-            </div>
-            <div>
-              <p />
+            <div className="btn-container">
+              <ToggleFavorite isButton={true} id={id} info={info} />
             </div>
           </div>
         </Card>

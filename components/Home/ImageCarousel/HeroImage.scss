@@ -1,6 +1,6 @@
 .hero-container {
     display: flex;
-    height: 600px;
+    height: 37.5em;
     width: 100%;
     align-items: center;
     justify-content: flex-end;
@@ -41,6 +41,15 @@
         }
         h3 {
             font-size: 15px;
+            display: flex;
+            .genres {
+                display: flex;
+                margin-left: 0.3em;
+                .genre {
+                    margin-left: 0.3em;
+                    color: rgb(190, 220, 241);
+                }
+            }
         }
         p {
             margin: 0 0 20px;
@@ -69,3 +78,66 @@
         }   
     }
 }
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    /* Styles */
+    .hero-container {
+        height: 24em;
+        .hero-info {
+            width: 100%;
+            padding: 0 2em;
+            h1 {
+                font-size: 1.5em;
+            }
+            h3 {
+                font-size: 0.6em;
+            }
+            p {
+                font-size: 0.7em;
+                margin-bottom: 1em;
+                .readMoreBtn {
+                    margin-bottom: 0.1em;
+                    font-size: 0.8em;
+                    .arrow {
+                        font-size: 1em;
+                    }
+                }
+            }
+            .buttons-container {
+                .button1 {
+                    font-size: 0.5em;
+                }
+            }   
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Styles */
+    .hero-container {
+        height: 27em;
+        .hero-info {
+            width: 100%;
+            padding: 40px;
+            h1 {
+                font-size: 2.2em;
+            }
+            h3 {
+                font-size: 15px;
+            }
+            p {
+                font-size: 1em;
+                .readMoreBtn {
+                    font-size: 0.8em;
+                }
+            }
+            .buttons-container {
+                .button1 {
+                    font-size: 0.8em;
+                }
+            }   
+        }
+    }
+}
+  

@@ -17,6 +17,7 @@ import SignedOutMenu from "./SignedOutMenu";
 import CategoriesMenu from "./CategoriesMenu";
 import SignInModal from "../SignIn/SignInModal";
 import SignUpModal from "../SignUp/SignUpModal";
+import NavDrawer from '../Drawer/Drawer';
 import "./Navbar.scss";
 
 class Navbar extends Component {
@@ -44,7 +45,7 @@ class Navbar extends Component {
 
   render() {
     const { linkNames } = this.state;
-    const { currentModal, auth } = this.props;
+    const { currentModal, auth, profile } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const nothing = null;
     return (
@@ -62,7 +63,7 @@ class Navbar extends Component {
         <AppBar position="fixed" color="default">
           <Toolbar className="toolbar">
             <Link href="/">
-              <a>
+              <a className="logo-link">
                 <img
                   className="logo"
                   src="/static/logo.jpg"
@@ -71,7 +72,7 @@ class Navbar extends Component {
               </a>
             </Link>
             <SearchBar />
-            <div>
+            <div className="menus">
               <CategoriesMenu linkNames={linkNames} />
               {authenticated ? (
                 <SignedInMenu />
@@ -81,6 +82,7 @@ class Navbar extends Component {
                   handleSignIn={this.handleSignIn}
                 />
               )}
+              <NavDrawer handleSignIn={this.handleSignIn} handleSignUp={this.handleSignUp} authenticated={authenticated} />
             </div>
           </Toolbar>
         </AppBar>
@@ -93,7 +95,7 @@ const mapStateToProps = state => {
   return {
     currentModal: state.modal,
     auth: state.firebase.auth,
-    authUser: state.auth
+    profile: state.firebase.profile
   };
 };
 

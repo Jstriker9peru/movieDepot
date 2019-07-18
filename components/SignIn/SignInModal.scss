@@ -44,3 +44,19 @@
         }
     }
 }
+
+@media only screen and (max-width: 440px) {
+    /* Styles */
+    .sign-in-modal {
+        .sign-in-container {
+            margin: 0 2em;
+            width: auto;
+            .sign-in { 
+                width: auto;
+                .grid {
+                    width: 300px;
+                }
+            }
+        }
+    }
+}

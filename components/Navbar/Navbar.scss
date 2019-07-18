@@ -3,8 +3,10 @@
         background-color: rgb(240, 239, 239);
         color: white;
         display: flex;
+        width: 100%;
         align-items: center;
         justify-content: space-between;
+        height: 64px;
     }
     .logo {
         margin-left: 50px;
@@ -13,26 +15,63 @@
         margin: 5px 0 5px 30px;
         border-radius: 50%;
     }
-    .search-icon {
-        margin: 0 10px;
-        color: black;
+    .menus {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    .search-results {
-        position: absolute;
-        background: white;
-        width: 239px;
-        color: black;
-        top: 59px;
-        border-radius: 5px;
-        left: 585px;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        .single-result {
-            padding: .4em;
+    .search-form {
+        position: relative;
+        .search-icon {
+            margin: 0 10px;
+            color: black;
+        }
+        .search-results {
+            position: absolute;
+            background: white;
+            width: 273px;
+            color: black;
+            top: 59px;
+            border-radius: 5px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
             border: 1px solid black;
-            cursor: pointer;
-            &:hover {
-                background: rgb(208, 208, 233);
+            .single-result {
+                padding: .4em;
+                border-bottom: 1px solid black;
+                cursor: pointer;
+                &:hover {
+                    background: rgb(208, 208, 233);
+                }
             }
         }
+    }
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    /* Styles */
+    .logo-link {
+        height: 3em;
+        width: 3em;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo {
+            height: 3em;
+            width: 3em;
+            margin: 5px 0 5px 0;
+            border-radius: 50%;
+        }
+    }
+    .search-form {
+        .search-input {
+            width: 8em;
+            margin: 0.5em 0;
+        }
+    }
+    .category-menu {
+        display: none;
     }
 }

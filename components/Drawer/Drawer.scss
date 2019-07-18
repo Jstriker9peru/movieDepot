@@ -1,0 +1,16 @@
+.drawer {
+    display: none;
+    .drawer-btn {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    /* Styles */
+    .drawer {
+        display: block;
+        .drawer-btn {
+            display: block;
+        }
+    }
+}

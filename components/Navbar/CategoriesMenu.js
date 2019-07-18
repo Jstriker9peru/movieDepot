@@ -15,7 +15,7 @@ const CategoriesMenu = ({ linkNames }) => {
   }
 
   return (
-    <React.Fragment>
+    <div className="category-menu">
       <Button
         aria-owns={anchorEl ? "simple-menu" : undefined}
         aria-haspopup="true"
@@ -43,7 +43,7 @@ const CategoriesMenu = ({ linkNames }) => {
             );
           })}
       </Menu>
-    </React.Fragment>
+    </div>
   );
 };
 

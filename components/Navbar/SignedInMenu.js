@@ -6,6 +6,7 @@ import { withFirebase } from "react-redux-firebase";
 import { logOut } from "../../modules/actions/authActions";
 import { Button, Menu, MenuItem, Avatar } from "@material-ui/core";
 import MenuLink from "./MenuLink";
+import './SignedInMenu.scss';
 
 const SignedInMenu = ({ firebase, logOut, router, profile }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,7 +26,7 @@ const SignedInMenu = ({ firebase, logOut, router, profile }) => {
     router.push("/");
   };
   return (
-    <React.Fragment>
+    <div className="profile-menu">
       <Button
         aria-owns={anchorEl ? "simple-menu" : undefined}
         aria-haspopup="true"
@@ -58,7 +59,7 @@ const SignedInMenu = ({ firebase, logOut, router, profile }) => {
         />
         <MenuItem onClick={signOut}>Logout</MenuItem>
       </Menu>
-    </React.Fragment>
+    </div>
   );
 };
 

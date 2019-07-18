@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
+import { TMDB_API_KEY } from '../../../config';
 import Link from "next/link";
 import "./HeroImage.scss";
 
@@ -9,12 +10,22 @@ const HeroImage = ({ movieInfo }) => {
   const overviewLength = overview.length;
   const exceededLength = overviewLength > overviewMaxLength;
   const [shouldReadMore, changeReadMore] = useState(exceededLength);
+  const [genres, setGenres] = useState([]);
   const reducedOverview =
     overview.substring(0, overviewMaxLength).replace(/\w+[.!?]?$/, "") + " ...";
 
   const changeOverview = () => {
     changeReadMore(!shouldReadMore);
   };
+
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US`)
+    .then(res => res.json())
+    .then(info => {
+      let newGenres = info.genres.slice(0, 3);
+      setGenres(newGenres);
+    })
+  }, []);
 
   return (
     <div
@@ -25,7 +36,19 @@ const HeroImage = ({ movieInfo }) => {
     >
       <div className="hero-info">
         <h1>{title}</h1>
-        <h3>{release_date} | Family, Adventure, Drama, Fantasy</h3>
+        <h3 className="extra-info">
+          {release_date}
+          <div className="genres">
+            {genres &&
+                genres.map(genre => {
+                  return (
+                    <div key={genre.id} className="genre">
+                      {genre.name}
+                    </div>
+                  );
+            })}
+          </div>
+        </h3>
         <p>
           {shouldReadMore ? reducedOverview : overview}
           <br />
@@ -33,12 +56,12 @@ const HeroImage = ({ movieInfo }) => {
             shouldReadMore ? (
               <button className="readMoreBtn" onClick={changeOverview}>
                 Read More
-                <i className="material-icons">arrow_drop_down</i>
+                <i className="arrow material-icons">arrow_drop_down</i>
               </button>
             ) : (
               <button className="readMoreBtn" onClick={changeOverview}>
                 Read Less
-                <i className="material-icons">arrow_drop_up</i>
+                <i className="arrow material-icons">arrow_drop_up</i>
               </button>
             )
           ) : null}

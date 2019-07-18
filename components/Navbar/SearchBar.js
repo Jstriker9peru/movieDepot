@@ -60,6 +60,7 @@ const SearchBar = ({ handleSubmit }) => {
   return (
     <React.Fragment>
       <form
+        className="search-form"
         ref={node}
         onSubmit={handleSubmit(formSubmit)}
         style={{
@@ -76,6 +77,7 @@ const SearchBar = ({ handleSubmit }) => {
         </div>
         <Field
           name="Search"
+          className="search-input"
           component="input"
           type="text"
           placeholder="Find a Movie..."
@@ -86,6 +88,7 @@ const SearchBar = ({ handleSubmit }) => {
         />
         <button
           type="submit"
+          className="submit-btn"
           style={{
             height: "100%",
             width: "auto",

@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import './SignedOutMenu.scss';
 
 const SignedOutMenu = ({ handleSignIn, handleSignUp }) => {
   return (
-    <React.Fragment>
+    <div className="sign-out-menu">
       <Button onClick={handleSignIn}>Login</Button>
       <Button onClick={handleSignUp}>Register</Button>
-    </React.Fragment>
+    </div>
   );
 };
 
