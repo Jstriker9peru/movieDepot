@@ -5,7 +5,6 @@ import { compose } from "redux";
 import { useRouter } from "next/router";
 import { TMDB_API_KEY } from "../../config";
 import { Field, reduxForm } from "redux-form";
-import "./SearchBar.scss";
 
 const SearchBar = ({ handleSubmit }) => {
   const router = useRouter();

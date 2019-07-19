@@ -1,0 +1,32 @@
+.footer-section {
+    background: #333;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+        margin: 1.5em 0;
+        color: white;
+        display: flex;
+        &::before {
+            content: "";
+            width: 1px;
+            height: inherit;
+            background: white;
+            margin-right: 1em;
+        }
+        &::after {
+            content: "";
+            width: 1px;
+            height: inherit;
+            background: white;
+            margin-left: 1em;
+        }
+        .TMDB-logo {
+            margin-left: 0.8em;
+            width: 4em;
+            height: 4em;
+        }
+    }
+}

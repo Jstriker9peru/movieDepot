@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { TMDB_API_KEY } from "../config";
 import { getFavorites } from "../modules/actions/favoritesActions";
 import { withFirebase, withFirestore } from "react-redux-firebase";
+import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import ContentWrapper from "../components/ContentWrapper/ContentWrapper";
 import CardContainer from "../components/Home/CardContainer/CardContainer";
@@ -77,6 +78,7 @@ class IndexPage extends Component {
             results={topRated}
           />
         </ContentWrapper>
+        <Footer />
       </div>
     );
   }
