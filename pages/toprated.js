@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TMDB_API_KEY } from "../config";
+import Footer from '../components/Footer/Footer';
 import Navbar from "../components/Navbar/Navbar";
 import ListPage from "../components/ListPage/ListPage";
 import LoadingPage from "../components/LoadingPage/LoadingPage";
@@ -68,6 +69,7 @@ class TopRated extends Component {
               loadMore={this.loadMoreTopRated}
               name="Top Rated"
             />
+            <Footer />
           </div>
         )}
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "next/router";
 import { TMDB_API_KEY } from "../config";
+import Footer from '../components/Footer/Footer';
 import Navbar from "../components/Navbar/Navbar";
 import ListPage from "../components/ListPage/ListPage";
 import LoadingPage from "../components/LoadingPage/LoadingPage";
@@ -90,6 +91,7 @@ class Results extends Component {
               loadMore={this.loadMoreResults}
               resultNumber={this.state.resultNumber}
             />
+            <Footer />
           </div>
         )}
       </div>

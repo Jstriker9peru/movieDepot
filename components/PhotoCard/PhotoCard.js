@@ -21,7 +21,7 @@ const PhotoCard = ({ setMain, deletePhoto, profile, photoInfo }) => {
   };
   return (
     <Card className="card-style">
-      <CardMedia component="img" height="180" image={photoInfo.url} />
+      <CardMedia component="img" height="180" alt="profile pic" image={photoInfo.url} />
       <CardActions>
         <Button
           className="main-btn"

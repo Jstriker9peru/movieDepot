@@ -7,6 +7,7 @@ const CastCard = ({ name, photo, role }) => {
     <Card className="cast-card">
       <img
         className="card-poster"
+        alt={`Image of ${name}`}
         src={
           photo
             ? `http://image.tmdb.org/t/p/w92/${photo}`

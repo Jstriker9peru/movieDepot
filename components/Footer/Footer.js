@@ -5,8 +5,8 @@ const Footer = () => {
     return (
         <section className="footer-section">
             <div className="content">
-                <p>Moive data powered by</p>
-                <img className="TMDB-logo" alt="TMDB Logo" src="./static/TMDBLogo.svg" /> 
+                <p>Movie data powered by</p>
+                <img className="TMDB-logo" alt="TMDB Logo" src="/static/TMDBLogo.svg" /> 
             </div>
         </section>
     )

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "next/router";
 import { TMDB_API_KEY } from "../config.js";
+import Footer from '../components/Footer/Footer';
 import Navbar from "../components/Navbar/Navbar";
 import FilmDetails from "../components/FilmDetails/FilmDetails";
 
@@ -70,6 +71,7 @@ class filmDetails extends Component {
           directors={directors}
           genres={genres}
         />
+        <Footer />
       </div>
     );
   }

@@ -19,6 +19,7 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
           <div className="poster-container">
             <img
               className="poster"
+              alt={`${title} poster`}
               height="auto"
               width="320"
               src={

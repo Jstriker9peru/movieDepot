@@ -13,6 +13,7 @@ const SearchBar = ({ handleSubmit }) => {
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
+
   const search = query => {
     if (query !== "") {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
@@ -31,7 +32,7 @@ const SearchBar = ({ handleSubmit }) => {
   const node = useRef();
   useEffect(() => {
     search(searchTerm);
-  });
+  }, [searchTerm]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClick);
