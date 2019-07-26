@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
 import {
   addFavorite,
   removeFavorite
 } from "../../modules/actions/favoritesActions";
+import Notification from "../Notification/Notification";
 import { useFirestore, useFirebase } from "react-redux-firebase";
 import "./ToggleFavorite.scss";
 
@@ -20,13 +21,26 @@ const ToggleFavorite = ({
   const favorited = favorites.some(favorite => id === favorite.id);
   const firestore = useFirestore();
   const firebase = useFirebase();
+  const [isOpen, setOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+
   const toggleFavorited = info => {
-    if (authUser.currentUser) {
-      if (favorited) {
-        removeFavorite(info, firestore, firebase);
-      } else {
-        addFavorite(info, firestore, firebase);
+    try {
+      if (authUser.currentUser) {
+        if (favorited) {
+          removeFavorite(info, firestore, firebase);
+          setOpen(true);
+          setMessage('Removed from favorites');
+        } else {
+          addFavorite(info, firestore, firebase);
+          setOpen(true);
+          setMessage('Added to favorites');
+        }
       }
+
+    } catch (error) {
+      setOpen(true);
+      setMessage('Error Occurred');
     }
   };
 
@@ -63,6 +77,7 @@ const ToggleFavorite = ({
           )}
         </div>
       )}
+      <Notification message={message} isOpen={isOpen} setOpen={setOpen} />
     </React.Fragment>
   );
 };

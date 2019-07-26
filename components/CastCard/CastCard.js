@@ -17,7 +17,7 @@ const CastCard = ({ name, photo, role }) => {
       />
       <div className="actor-info">
         <div className="actor-name">{name}</div>
-        <div className="character">{role}</div>
+        <div className="character">{role ? role : 'N/A'}</div>
       </div>
     </Card>
   );

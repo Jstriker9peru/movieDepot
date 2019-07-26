@@ -50,7 +50,7 @@ const HeroImage = ({ movieInfo }) => {
           </div>
         </h3>
         <p>
-          {shouldReadMore ? reducedOverview : overview}
+          {overview ? (shouldReadMore ? reducedOverview : overview) : 'No description available'}
           <br />
           {exceededLength ? (
             shouldReadMore ? (

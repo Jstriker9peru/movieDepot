@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
     form: formReducer,
-    modal: modalReducer,
+    modal: modalReducer
 })
 
 export default rootReducer;

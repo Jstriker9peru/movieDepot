@@ -7,9 +7,11 @@ import "./FilmDetails.scss";
 
 const FilmDetails = ({ info, actors, similar, directors, genres }) => {
   const { title, overview, poster_path, release_date, runtime, id } = info;
+  const empty = 'N/A';
   actors = actors.slice(0, 17);
   similar = similar.length ? similar.slice(0, 9) : null;
   genres = genres.slice(0, 3);
+
 
   return (
     <div className="film-details">
@@ -39,14 +41,14 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
                 Release Date
                 <br />{" "}
               </span>{" "}
-              {release_date}
+              {release_date ? release_date : empty}
             </div>
             <div className="overview">
               <span className="tag">
                 Plot
                 <br />{" "}
               </span>{" "}
-              {overview}
+              {overview ? overview : empty}
             </div>
             <div className="genres">
               {genres &&

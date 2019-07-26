@@ -16,6 +16,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import PhotoCard from "../PhotoCard/PhotoCard";
 import TextField from "@material-ui/core/TextField";
+import Notification from "../Notification/Notification";
 import "./ProfilePage.scss";
 
 const validate = values => {
@@ -74,6 +75,8 @@ const ProfilePage = ({
 }) => {
   const firebase = useFirebase();
   const firestore = useFirestore();
+  const [isOpen, setOpen] = useState(false);
+  const [message, setMessage] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
   const { displayName } = authUser.currentUser;
   const authenticated = auth.isLoaded && !auth.isEmpty;
@@ -87,7 +90,14 @@ const ProfilePage = ({
     mainPhoto && otherPhotos ? [...mainPhoto, ...otherPhotos] : null;
 
   const updateProfile = info => {
-    update(firestore, firebase, info);
+    try {
+      update(firestore, firebase, info);
+      setOpen(true);
+      setMessage('Profile Updated');
+    } catch (error) {
+      setOpen(true);
+      setMessage('Error Updating Profile');
+    }
   };
 
   const onDrop = file => {
@@ -204,6 +214,7 @@ const ProfilePage = ({
           </div>
         </div>
       </div>
+      <Notification message={message} isOpen={isOpen} setOpen={setOpen} />
     </div>
   );
 };

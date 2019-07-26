@@ -4,7 +4,7 @@
     background-color: #465462;
     border-radius: 5px;
     height: auto;
-    margin: 50px 0;
+    margin: 3em 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,5 +13,6 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+        margin-bottom: 1.5em;
     }
 }
