@@ -8,18 +8,14 @@
     position: relative;
     font-family: 'Lato';
     display: grid;
-    grid-column-gap: 50px;
-    grid-template-rows: 500px 1050px;
+    grid-template-rows: 520px 1050px;
     grid-template-areas: 
         "description cast"
         "similar cast";
     .description-container {
         grid-area: 'description';
-        width: 800px;
-        height: 450px;
-        margin: 30px 0 0 50px;
-        position: relative;
-        top: -39px;
+        width: auto;
+        height: auto;
         .description-title {
             position: relative;
             display: flex;
@@ -46,6 +42,7 @@
             background: black;
             height: auto;
             width: 800px;
+            margin: 0 auto;
             position: relative;
             .poster-container {
                 position: relative;
@@ -115,13 +112,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 1500px;
+        height: auto;
         grid-area: 'cast';
         position: relative;
-        margin-top: 30px;
+        margin-top: 1em;
         h1 {
-            margin: 0px;
-            padding: 0px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -275,12 +270,13 @@
         width: 100%;
         grid-template-columns: 100%;
         grid-template-rows: auto;
+        padding-bottom: 0;
         grid-template-areas: 
             "description"
             "cast"
             "similar";
         .description-container {
-            margin: 2em auto;
+            margin: 0 auto 2em;
             height: auto;
             width: auto;
             .description-title {
@@ -364,8 +360,9 @@
             "description"
             "cast"
             "similar";
+        padding-bottom: 2em;
         .description-container {
-            margin: 2em auto 0;
+            margin: 0 auto 3em;
             height: auto;
         }
         .cast-container {
