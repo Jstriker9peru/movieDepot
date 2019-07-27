@@ -15,6 +15,7 @@ const Notification = ({ message, isOpen, setOpen }) => {
 
     return (
         <Snackbar
+            className="notification"
             anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
