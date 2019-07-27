@@ -36,6 +36,9 @@ const ToggleFavorite = ({
           setOpen(true);
           setMessage('Added to favorites');
         }
+      } else {
+        setOpen(true);
+        setMessage('Must be logged in');
       }
 
     } catch (error) {
