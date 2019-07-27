@@ -23,7 +23,7 @@ const SignedInMenu = ({ firebase, logOut, router, profile }) => {
     setAnchorEl(null);
     logOut();
     firebase.logout();
-    router.push("/");
+    window.location.reload();
   };
   return (
     <div className="profile-menu">
