@@ -8,7 +8,7 @@ import "./FilmDetails.scss";
 const FilmDetails = ({ info, actors, similar, directors, genres }) => {
   const { title, overview, poster_path, release_date, runtime, id } = info;
   const empty = 'N/A';
-  actors = actors.slice(0, 17);
+  actors = (directors.length > 1) ? actors.slice(0, 16) : actors.slice(0, 17);
   similar = similar.length ? similar.slice(0, 9) : null;
   genres = genres.slice(0, 3);
 
