@@ -6,6 +6,7 @@ export const removeFavorite = (
 ) => async dispatch => {
   const user = firebase.auth().currentUser;
   try {
+    // Remove document from favorites
     await firestore
       .delete({
         collection: "users",
@@ -28,6 +29,7 @@ export const addFavorite = (
   if (user) {
 
     try {
+      // Add document to favorites
       await firestore
         .set(
           {
@@ -59,6 +61,7 @@ export const getFavorites = ({ firestore, firebase }) => async dispatch => {
   let currentUser = firebase.auth().currentUser;
   let favorites;
   if (currentUser) {
+    // Get all documents from favorites
     favorites = await firestore
       .collection("users")
       .doc(`${currentUser.uid}`)

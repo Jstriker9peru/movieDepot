@@ -56,6 +56,7 @@ export const SignUp = ({ firestore, firebase }, user) => async dispatch => {
 
 export const fetchUser = ({ firestore }, user) => {
   return async dispatch => {
+    // Get User data
     let userInfo = await firestore
       .collection("users")
       .doc(`${user.uid}`)
@@ -71,7 +72,9 @@ export const fetchUser = ({ firestore }, user) => {
 export const updateProfile = ({ firestore, firebase }, values) => {
   return async dispatch => {
     try {
+      // Get current user
       const user = firebase.auth().currentUser;
+      // Update user profile
       await user.updateProfile({
         displayName: values.displayName,
         lastName: values.lastName

@@ -46,8 +46,10 @@ export const setMainPhoto = (
   { firestore, firebase },
   url
 ) => async dispatch => {
+  // Get current user
   const user = firebase.auth().currentUser;
   try {
+    // Update user profile
     await firebase.updateProfile({
       photoURL: url
     });
@@ -70,8 +72,10 @@ export const deletePhoto = (
   photoInfo,
   isMain
 ) => async dispatch => {
+  // Get current user
   const user = firebase.auth().currentUser;
   try {
+    // Delete document from user_images
     await firebase.deleteFile(`${user.uid}/user_image/${photoInfo.name}`);
     if (isMain) {
       await firestore.set(
