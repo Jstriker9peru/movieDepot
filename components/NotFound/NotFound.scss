@@ -1,0 +1,26 @@
+.not-found-page {
+    margin-top: 4em;
+    display: flex;
+    justify-content: center;
+    .not-found-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        background-color: #ffffff;
+        padding: 4em 8em;
+        margin-top: 2em;
+        -webkit-box-shadow: -2px 3px 37px -16px rgba(0,0,0,0.75);
+        -moz-box-shadow: -2px 3px 37px -16px rgba(0,0,0,0.75);
+        box-shadow: -2px 3px 37px -16px rgba(0,0,0,0.75);
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 3em;
+        }
+        .return-btn {
+            color: white;
+        }
+    }
+}

@@ -26,7 +26,7 @@ const ToggleFavorite = ({
 
   const toggleFavorited = info => {
     try {
-      if (authUser.currentUser) {
+      if (authUser.authenticated) {
         if (favorited) {
           removeFavorite(info, firestore, firebase);
           setOpen(true);
