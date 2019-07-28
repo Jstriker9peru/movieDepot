@@ -67,7 +67,7 @@ const HeroImage = ({ movieInfo }) => {
           ) : null}
         </p>
         <div className="buttons-container">
-          <Link href={`/filmDetails?id=${id}`} as={`/filmDetails/${id}`}>
+          <Link href={`/filmDetails?id=${id}`} as={`/details/${id}`}>
             <Button className="button1" variant="contained" color="secondary">
               More Info
             </Button>
