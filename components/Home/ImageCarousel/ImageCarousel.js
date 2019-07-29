@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { TMDB_API_KEY } from "../../../config";
 import { Carousel } from "react-responsive-carousel";
+import { TMDB_API_KEY } from "../../../config";
 import HeroImage from "./HeroImage";
 
 class ImageCarousel extends Component {
