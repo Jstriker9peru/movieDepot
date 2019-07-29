@@ -29,8 +29,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
-    "heroku-postbuild": "npm run build"
+    "start": "NODE_ENV=production node server.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.0"
