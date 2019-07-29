@@ -26,6 +26,9 @@
     "redux-thunk": "^2.3.0",
     "revalidate": "^1.2.0"
   },
+  "engines": {
+    "node": "10.15.1"
+  },
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
