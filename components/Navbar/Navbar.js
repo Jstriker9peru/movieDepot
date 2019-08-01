@@ -22,7 +22,7 @@ import "./Navbar.scss";
 
 class Navbar extends Component {
   state = {
-    linkNames: ["Upcoming", "Popular", "TopRated", "test"]
+    linkNames: ["Upcoming", "Popular", "TopRated"]
   };
 
   handleSignIn = () => {

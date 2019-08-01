@@ -54,7 +54,7 @@ const SearchBar = ({ handleSubmit }) => {
   };
 
   const formSubmit = values => {
-    router.push(`/results/${searchTerm}`);
+    router.push(`/results?query=${values.Search}`, `/results/${values.Search}`);
   };
 
   return (
