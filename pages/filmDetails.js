@@ -11,7 +11,8 @@ class filmDetails extends Component {
     actors: [],
     similar: [],
     directors: [],
-    genres: []
+    genres: [],
+    upcoming: []
   };
 
   fetchMovieData(id) {
@@ -39,6 +40,18 @@ class filmDetails extends Component {
             similar: similar.results,
             directors,
             genres: info.genres
+          }, () => {
+            if (similar.results.length === 0) {
+              fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_KEY}&language=en-US&page=1&region=US`)
+              .then(res => res.json())
+              .then(upcomingMovies => {
+                let upcoming = upcomingMovies.results;
+                upcoming = upcoming.slice(0, 9);
+                this.setState({
+                  upcoming
+                })
+              })
+            }
           });
         });
     } catch (error) {
@@ -59,7 +72,7 @@ class filmDetails extends Component {
   }
 
   render() {
-    const { info, actors, similar, directors, genres } = this.state;
+    const { info, actors, similar, upcoming, directors, genres } = this.state;
     return (
       <div>
         <Navbar />
@@ -70,6 +83,7 @@ class filmDetails extends Component {
           similar={similar}
           directors={directors}
           genres={genres}
+          upcoming={upcoming}
         />
         <Footer />
       </div>

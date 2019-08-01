@@ -5,7 +5,7 @@ import ToggleFavorite from "../ToggleFavorite/ToggleFavorite";
 import SinglePosterCard from "../SinglePosterCard/SinglePosterCard";
 import "./FilmDetails.scss";
 
-const FilmDetails = ({ info, actors, similar, directors, genres }) => {
+const FilmDetails = ({ info, actors, similar, directors, genres, upcoming }) => {
   const { title, overview, poster_path, release_date, runtime, id } = info;
   const empty = 'N/A';
   actors = (directors.length > 1) ? actors.slice(0, 16) : actors.slice(0, 17);
@@ -96,11 +96,36 @@ const FilmDetails = ({ info, actors, similar, directors, genres }) => {
             })}
         </div>
       </div>
-      {similar && (
+      {similar ? (
         <div className="similar-container">
+          {
+
+          }
           <h1>Similar Movies</h1>
           <div className="similar-box">
             {similar.map(movie => {
+              const {
+                poster_path: similarPoster,
+                title: similarTitle,
+                id
+              } = movie;
+              return (
+                <SinglePosterCard
+                  key={id}
+                  id={id}
+                  poster_path={similarPoster}
+                  title={similarTitle}
+                  movieInfo={movie}
+                />
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div className="similar-container">
+          <h1>Upcoming Movies</h1>
+          <div className="similar-box">
+            {upcoming.map(movie => {
               const {
                 poster_path: similarPoster,
                 title: similarTitle,
